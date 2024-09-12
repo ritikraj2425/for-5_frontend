@@ -11,7 +11,7 @@ export default function HomePage() {
         try {
             await signOut(auth);
             localStorage.removeItem('email');
-            router.push('/Pages/Login'); // Redirect to login page after sign-out
+            router.push('/Pages/Login');
         } catch (error) {
             console.error('Error during sign-out:', error);
         }
