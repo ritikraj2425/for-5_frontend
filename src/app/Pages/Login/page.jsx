@@ -14,7 +14,7 @@ export default function Login() {
     useEffect(() => {
         const storedEmail = localStorage.getItem('email');
         if (storedEmail) {
-            router.push('/'); // Redirect to home if already logged in
+            router.push('/');
         }
     }, [router]);
 
@@ -23,7 +23,7 @@ export default function Login() {
         try {
             const result = await signInWithPopup(auth, provider);
             localStorage.setItem('email', result.user.email);
-            router.push('/'); // Redirect to home after Google sign-in
+            router.push('/');
         } catch (error) {
             console.error('Error during Google sign-in:', error);
             toast.error('Error during Google sign-in.');
@@ -35,7 +35,7 @@ export default function Login() {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             localStorage.setItem('email', email);
-            router.push('/'); // Redirect to home after email sign-in
+            router.push('/');
         } catch (error) {
             console.error('Error during email sign-in:', error);
             toast.error('Error during email sign-in.');
@@ -76,8 +76,8 @@ export default function Login() {
                 </div>
                 <button type="submit">Sign In</button>
             </form>
-            <button onClick={handleResetPassword}>Forgot Password?</button>
-            <button onClick={handleNavigateToSignUp}>Sign Up</button>
+            <button onClick={handleResetPassword}>Forgot Password?</button><br></br>
+            <button onClick={handleNavigateToSignUp}>Sign Up</button><br></br>
             <button onClick={handleGoogleSignIn}>Sign In with Google</button>
         </div>
     );
