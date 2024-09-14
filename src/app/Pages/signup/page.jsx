@@ -15,26 +15,26 @@ export default function Signup() {
 
 
     const handleGoogle = (e) => {
-        e.preventDefault();
-        console.log("Attempting Google sign-in...");
-        signInWithPopup(auth, provider)
-            .then((data) => {
-                console.log("User signed in:", data.user.email);
-                localStorage.setItem("email", data.user.email);
-                toast.success("Sign-in successful! Redirecting...", {
-                    position: "top-center",
-                    autoClose: 1500,
-                });
-                router.push("/");
-            })
-            .catch((error) => {
-                console.error("Error during sign-in:", error);
-                toast.error("Error during Google sign-in: " + error.message, {
-                    position: "top-center",
-                    autoClose: 1500,
-                });
+    e.preventDefault();
+    console.log("Attempting Google sign-in...");
+    signInWithPopup(auth, provider)
+        .then((data) => {
+            console.log("User signed in:", data.user.email);
+            localStorage.setItem("email", data.user.email);
+            toast.success("Sign-in successful! Redirecting...", {
+                position: "top-center",
+                autoClose: 1500,
             });
-    };
+            router.push("/");
+        })
+        .catch((error) => {
+            console.error("Error during sign-in:", error);
+            toast.error("Error during Google sign-in: " + error.message, {
+                position: "top-center",
+                autoClose: 1500,
+            });
+        });
+};
 
 
     const handleSignup = async (e) => {
