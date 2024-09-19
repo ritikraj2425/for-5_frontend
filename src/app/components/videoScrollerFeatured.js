@@ -17,7 +17,7 @@ function VideoScrollerFeatured() {
                 setLoading(false);
             }
         }
-    
+
         fetchData();
     }, []);
 
@@ -33,33 +33,27 @@ function VideoScrollerFeatured() {
 
 
     return (
-        <div className="flex overflow-x-auto space-x-4 mt-5 ml-0  md:ml-10 mx-auto">
-            {videos.map((video, index) => {
-                const videoId = extractYouTubeId(video.link);
+        <div className="flex space-x-4 mt-5 ml-0 md:ml-10 mx-auto overflow-x-auto">
+            {videos.map((video) => {
+                const youtubeVideoId = extractYouTubeId(video.link);
                 return (
-                    <a
-                        key={index}
-                        href={video.link}
-                        rel="noopener noreferrer"
-                        className="block flex-shrink-0 md:w-1/3"
-                    >
-                        {videoId ?
+                    <a href={video.link} rel="videoLink" className="block flex-shrink-0 md:w-1/3"> {/* Slightly increased width */}
+                        {youtubeVideoId ? (
                             <img
-                                className="w-full h-64 border-white  object-cover rounded-lg shadow-lg"
-                                src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`}
-                                alt={`Thumbnail for video ${videoId}`}
+                                className="w-full h-60 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:scale-105"
+                                src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
+                                alt={`Thumbnail for video ${youtubeVideoId}`}
                             />
-                            
-
-                        : (
-                            <p className="text-red-500">Invalid video link</p>
+                        ) : (
+                            <p>Invalid video Link</p>
                         )}
                     </a>
-
-                    
                 );
             })}
         </div>
+
+
+
     );
 }
 

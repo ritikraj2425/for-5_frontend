@@ -1,8 +1,8 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { auth } from '@/app/lib/fireBaseConfig';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth,provider } from '@/app/lib/fireBaseConfig';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Reset() {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ export default function Reset() {
         e.preventDefault();
         try {
             await sendPasswordResetEmail(auth, email);
-            router.push('/Pages/Login'); // Redirect to login after sending reset email
+            router.push('/Pages/Login'); 
         } catch (error) {
             console.error('Error during password reset:', error);
         }

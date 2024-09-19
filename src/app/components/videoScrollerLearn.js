@@ -39,7 +39,7 @@ export default function VideoScrollerLearn() {
                     <a href={video.link} rel="videoLink" className="block flex-shrink-0 md:w-1/3">
                         {youtubeVideoId ?
                             <img
-                                className="w-full h-64 border-white  object-cover rounded-lg shadow-lg"
+                                className="w-full h-60 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:scale-105"
                                 src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
                                 alt={`Thumbnail for video ${youtubeVideoId}`}
                             /> : <p>Invalid video Link</p>}
