@@ -1,11 +1,11 @@
 import Link from "next/link"
 import Questions from "../../homepagePageComponent/questions"
+import Navbar from '../../components/navbar'
 export default function HomePage() {
     return (
         <div className="bg-[#1B1B1B] min-h-screen">
-            <div className="h-[3rem] bg-gradient-to-r from-[#1B1B1B] to-[#E47406] w-full"> 
-                <Link href='/'><button className="text-white">Landing Page</button></Link>
-            </div>
+            
+            <Navbar/>
 
 
             <div className="md:flex flex-row">

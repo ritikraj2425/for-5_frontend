@@ -7,20 +7,12 @@ import VideoScrollerFeatured from './components/videoScrollerFeatured';
 import AboutSection from './components/aboutSectionLandingPage';
 import VideoScrollerLearn from './components/videoScrollerLearn';
 import { Button } from './components/moving-border';
-
+import Navbar from './components/navbar';
 
 export default function HomePage() {
     const router = useRouter();
 
-    const handleSignOut = async () => {
-        try {
-            await signOut(auth);
-            sessionStorage.removeItem('token');
-            router.push('/Pages/Login');
-        } catch (error) {
-            console.error('Error during sign-out:', error);
-        }
-    };
+   
     const handleGoToProblems =()=>{
         router.push('/Pages/homepage');
     }
@@ -30,8 +22,8 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-[url('/backgroundWhiteGrid.png')] bg-repeat bg-center opacity-70 "></div>
 
             <div className='relative z-10'>
+                <Navbar/>
 
-                <div className="h-[3rem] bg-[#FF9900] w-full"><button onClick={handleSignOut} className=''>Sign Out</button></div>
 
 
 

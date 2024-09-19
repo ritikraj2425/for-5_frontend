@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Questions from "@/app/homepagePageComponent/questions";
+import Navbar from '../../../components/navbar'
+
 
 export default function QuestionPage() {
     const [statusDropdown, setStatusDropdown] = useState(false);
@@ -36,9 +38,7 @@ export default function QuestionPage() {
 
     return (
         <div className="bg-[#1B1B1B] min-h-screen">
-            <div className="h-[3rem] bg-gradient-to-r from-[#1B1B1B] to-[#E47406] w-full">
-                <Link href="/Pages/homepage"><button className="text-white">HomePage</button></Link>
-            </div>
+            <Navbar/>
 
             <div className="h-[3.5rem] bg-[#626262] flex ">
                 <div className="p-2">
