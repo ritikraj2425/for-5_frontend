@@ -7,10 +7,10 @@ function Questions() {
 
     const router = useRouter()
     const [questionData, setQuestionData] = useState([]);
-
+    const [searchData,setSearchData] = useState('');
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/questions').then((response) => {
+        fetch('https://quizprojectserver.vercel.app/api/questions').then((response) => {
             return response.json();
         }).then((data) => {
             setQuestionData(data);
@@ -32,6 +32,9 @@ function Questions() {
                             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2" />
                             <input
                                 type="text"
+                                onChange={(e)=>{
+                                    setSearchData(e.target.value)
+                                }}  
                                 placeholder="search questions"
                                 className="rounded-sm pl-10 p-1 w-full md:w-[40rem] sm:w-[30rem] h-[2rem] md:h-[3rem] focus:outline-none"
                             />
@@ -49,11 +52,12 @@ function Questions() {
 
 
                 <div className="md:flex-row flex-col mt-10 ml-4 md:ml-12 ">
-                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">ABCDE</button>
-                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">ABCDE</button>
-                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">ABCDE</button>
-                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">ABCDE</button>
-                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mt-[0.5rem]">ABCDE</button>
+                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">All</button>
+                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">Mathematics
+                    </button>
+                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">Physics</button>
+                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem]">Chemistry</button>
+                    <button className="rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mt-[0.5rem]">PYQs</button>
                 </div>
 
                 <div className="md:ml-12 ml-4 overflow-y-auto max-h-[calc(100vh-8rem)]">
@@ -75,25 +79,26 @@ function Questions() {
                                         <option value="all">Status</option>
                                         <option value="Easy">Solved</option>
                                         <option value="medium">Unsolved</option>
+                                        <option value="medium">Attempted</option>
                                     </select>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {questionData.map((item,index) => (
+                            {questionData ? questionData.map((item,index) => (
                                 <>
                                     <tr className="md:h-7 h-4"></tr>
                                     
                                     <tr key={item._id} className="cursor-pointer bg-[#5F5F5F] text-[#E7E7E4] ">
 
-                                        <td className="p-3 mt-4 "> <Link href={`/Pages/questionPage/${item._id}`}>{index+1}. {item.questionTitle}</Link></td>
+                                        <td className="p-3 mt-4 text-orange-200"> <Link href={`/Pages/questionPage/${item._id}`}>{index+1}. {item.questionTitle}</Link></td>
                                         <td className="p-3">{item.difficulty}</td>
                                         <td className="p-3">Unsolved</td>
                                     </tr>
                                     
                                 </>
 
-                            ))}
+                            )):<div className="animate-spin rounded-full h-7 w-7 border-t-2 border-b-2 border-orange-500"></div>}
 
 
 
