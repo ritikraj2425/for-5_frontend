@@ -3,21 +3,21 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { signInWithEmailAndPassword, signInWithPopup, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { auth, provider } from '@/app/lib/fireBaseConfig';
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const router = useRouter();
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
-        if (token) {
+        const token = localStorage.getItem('token');
+        const uid = localStorage.getItem('uid');
+        if (token && uid) {
             router.push({
                 pathname: '/',
-                query: { uid: JSON.parse(sessionStorage.getItem('uid')) }
+                query: { uid: JSON.parse(uid) }
             });
         }
     }, [router]);
@@ -25,13 +25,15 @@ export default function Login() {
     const handleEmailSignIn = async (e) => {
         e.preventDefault();
         try {
+            await setPersistence(auth, browserLocalPersistence);
+
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             const token = await user.getIdToken();
 
-            sessionStorage.setItem('token', token);
-            sessionStorage.setItem('uid', JSON.stringify(user.uid));
-    
+            localStorage.setItem('token', token);
+            localStorage.setItem('uid', JSON.stringify(user.uid));
+
             router.push('/');
         } catch (error) {
             console.error('Error during email sign-in:', error);
@@ -42,31 +44,20 @@ export default function Login() {
     const handleGoogleSignIn = async (e) => {
         e.preventDefault();
         try {
+            await setPersistence(auth, browserLocalPersistence);
+
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
             const token = await user.getIdToken();
 
-            sessionStorage.setItem('token', token);
-            sessionStorage.setItem('uid', JSON.stringify(user.uid));
-
-        
+            localStorage.setItem('token', token);
+            localStorage.setItem('uid', JSON.stringify(user.uid));
 
             router.push('/');
-
-            setTokenRefresh(user);
-
         } catch (error) {
             console.error('Error during Google sign-in:', error);
             toast.error('Error during Google sign-in.');
         }
-    };
-
-    const setTokenRefresh = (user) => {
-
-        setInterval(async () => {
-            const token = await user.getIdToken(true);
-            sessionStorage.setItem('token', token);
-        }, 6 * 24 * 60 * 60 * 1000);
     };
 
     const handleResetPassword = () => {
@@ -85,7 +76,7 @@ export default function Login() {
                         Login to Your Account
                     </h2>
                 </div>
-                <form className="mt-8 space-y-6 " onSubmit={handleEmailSignIn}>
+                <form className="mt-8 space-y-6" onSubmit={handleEmailSignIn}>
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <label htmlFor="email" className="sr-only">
@@ -143,15 +134,6 @@ export default function Login() {
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                         Sign Up
-                    </button>
-                </div>
-
-                <div>
-                    <button
-                        onClick={handleGoogleSignIn}
-                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                    >
-                        Sign In with Google
                     </button>
                 </div>
             </div>

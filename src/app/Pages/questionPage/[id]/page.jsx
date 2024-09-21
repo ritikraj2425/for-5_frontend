@@ -7,95 +7,96 @@ import Link from "next/link";
 import Questions from "@/app/homepagePageComponent/questions";
 import Navbar from '../../../components/navbar'
 
-
 export default function QuestionPage() {
     const [statusDropdown, setStatusDropdown] = useState(false);
     const { id } = useParams();
-    console.log(id);
-
-    const toggleStatusDropDown = () => {
-        setStatusDropdown(!statusDropdown);
-    }
-
     const [questionList, setQuestionList] = useState(false);
     const [questionData, setQuestionData] = useState([]);
+
     useEffect(() => {
-        fetch(`http://localhost:5000/api/questions/${id}`).then((response) => {
-            return response.json();
-        }).then((data) => {
-            setQuestionData(data);
-        }).catch((err) => {
-            console.log(err);
-        })
+        fetch(`https://quizprojectserver.vercel.app/api/questions/${id}`)
+            .then((response) => response.json())
+            .then((data) => setQuestionData(data))
+            .catch((err) => console.log(err));
+    }, [id]);
 
-    }, [])
-
-    console.log(questionData.options);
-
-    const toggleQuestionList = () => {
-        setQuestionList(!questionList);
-    }
+    const toggleStatusDropDown = () => setStatusDropdown(!statusDropdown);
+    const toggleQuestionList = () => setQuestionList(!questionList);
 
     return (
-        <div className="bg-[#1B1B1B] min-h-screen">
-            <Navbar/>
-
-            <div className="h-[3.5rem] bg-[#626262] flex ">
-                <div className="p-2">
-                    <TiThMenu className="md:text-4xl relative text-3xl cursor-pointer  text-[#f3efef]" onClick={toggleQuestionList} />
-                    {questionList &&
-
-                        <div
-                            className={`h-full ml-h-40% overflow-y-auto z-10 absolute mt-3 bg-[#1B1B1B] p-5 max-h-[calc(100vh)] overflow-x-auto 
-                                transform transition-transform duration-1000 ease-in-out ${questionList ? "translate-x-0" : "-translate-x-full"}
-                            `}
+        <div className="bg-gray-900 min-h-screen text-white">
+            <Navbar />
+            <div className="bg-orange-700 shadow-lg">
+                <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                        <TiThMenu
+                            className="text-3xl md:text-4xl cursor-pointer hover:text-gray-200 transition-colors"
+                            onClick={toggleQuestionList}
+                        />
+                        <h1 className="text-2xl md:text-3xl font-bold">Problem List</h1>
+                    </div>
+                    <div className="relative">
+                        <button
+                            onClick={toggleStatusDropDown}
+                            className="flex items-center space-x-1 text-xl md:text-2xl font-bold hover:text-gray-200 transition-colors"
                         >
-                            <Questions />
-                        </div>
-
-                    }
+                            <span>Status</span>
+                            <IoMdArrowDropdown className="text-2xl" />
+                        </button>
+                        {statusDropdown && (
+                            <div className="absolute top-full right-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg p-4 z-20">
+                                <p className="font-bold">Level- Easy</p>
+                                <p className="font-bold">Opened by- 544</p>
+                                <p className="font-bold">Solved by- 323</p>
+                            </div>
+                        )}
+                    </div>
                 </div>
-                <div className="md:text-3xl text-2xl font-bold mt-2 text-[#f3efef]">
-                    Problem List
-                </div>
-                <div className="md:text-3xl text-2xl font-bold mt-2 relative text-[#f3efef] flex ml-auto mr-4 cursor-pointer" onClick={toggleStatusDropDown}>
-                    Status <IoMdArrowDropdown className="mt-1.5" />
-                </div>
-
-                {statusDropdown && <div className="absolute mt-14 mr-5 left-auto right-0 bg-white rounded-md shadow-lg p-4   z-10">
-                    <p className="font-bold">Level- Easy</p>
-                    <p className="font-bold">Opened by- 544</p>
-                    <p className="font-bold">Solved by- 323</p>
-                </div>}
             </div>
 
+            {questionList &&
 
-            <div class="max-w-6xl mx-auto w-full bg-[#5F5F5F] p-1 mt-3 flex rounded-md">
-                <button className=" ml-auto right-0 bg-green-400 p-3 rounded-xl">Check</button>
-            </div>
+                <div
+                    className={`h-full ms:w-full ml-h-40% md:overflow-y-auto z-10 absolute mt-3 bg-[#1B1B1B] p-5 max-h-[calc(100vh)] overflow-x-auto 
+        transform transition-transform duration-1000 ease-in-out ${questionList ? "translate-x-0" : "-translate-x-full"}
+    `}
+                >
+                    <Questions />
+                </div>
 
-            <div class="max-w-6xl mx-auto w-full text-white bg-[#5F5F5F] p-4 rounded-md mt-3 flex ">
-                Q) {questionData.question}
-            </div>
+            }
 
-            <div className="mt-[5rem]">
+            <div className="max-w-4xl mx-auto px-4 py-8">
+                <div className="bg-gray-800 p-4 rounded-lg shadow-md mb-6">
+                    <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-xl font-bold text-orange-500">Question</h2>
+                        <button className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition-colors">
+                            Check
+                        </button>
+                    </div>
+                    <p className="text-lg">{questionData ? questionData.question : "Loading..."}</p>
+                </div>
+
                 {questionData?.options?.length > 0 ? (
-                    questionData.options.map((option, index) => (
-                        <div key={index} className="max-w-4xl mx-auto rounded-md cursor-pointer text-white w-full bg-[#5F5F5F] p-3 mt-2 flex ">
-                            {index + 1}) {option.option}
-                        </div>
-                    ))
+                    <div className="space-y-4">
+                        {questionData.options.map((option, index) => (
+                            <div
+                                key={index}
+                                className="bg-gray-800 p-4 rounded-lg shadow-md hover:bg-gray-700 transition-colors cursor-pointer border border-orange-700"
+                            >
+                                <p className="text-lg">
+                                    <span className="font-bold mr-2 text-orange-500">{index + 1})</span>
+                                    {option.option}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
                 ) : (
-                    <p>Loading options or no options available</p>
+                    <div className="flex justify-center items-center h-64">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+                    </div>
                 )}
-
-
             </div>
-
-
-
-
         </div>
-    )
-
+    );
 }

@@ -45,7 +45,7 @@ export default function Signup() {
 
             const user = userCredential.user;
 
-            const response = await fetch('http://localhost:5000/post/userDetails', {
+            const response = await fetch('https://quizprojectserver.vercel.app/post/userDetails', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -177,14 +177,14 @@ export default function Signup() {
                     </button>
                 </div>
 
-                <div>
+                {/* <div>
                     <button
                         onClick={handleGoogle}
                         className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                     >
                         Sign up with Google
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     );

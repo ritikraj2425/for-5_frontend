@@ -6,6 +6,8 @@ import { Menu } from 'lucide-react';
 import { signOut } from 'firebase/auth';
 import { auth } from '../lib/fireBaseConfig';
 import { useRouter } from 'next/navigation';
+import { IoExitOutline } from "react-icons/io5";
+
 
 
 
@@ -35,12 +37,12 @@ const Navbar = () => {
     useEffect( ()=>{
         const fetchUserData =async()=>{
 
-            let uid = JSON.parse(sessionStorage.getItem("uid"));
+            let uid = JSON.parse(localStorage.getItem("uid"));
             if(!uid){
                 console.log("no uid found");
             }
     
-            const response = await fetch(`http://localhost:5000/get/userDetails?uid=${uid}`);
+            const response = await fetch(`https://quizprojectserver.vercel.app/get/userDetails?uid=${uid}`);
             const data = await response.json();
             console.log(data);
             setUserData(data)
@@ -54,10 +56,11 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-gradient-to-r from-[#1B1B1B] to-amber-600 p-4">
+        <nav className="bg-gradient-to-r from-[#1B1B1B] to-orange-500 p-4">
             <div className="container mx-auto flex justify-between items-center">
 
                 <Link href="/" className="text-white font-bold text-xl">
+                    {/* <img href="/logo.png" alt='logo'/> */}
                     Logo
                 </Link>
 
@@ -69,7 +72,7 @@ const Navbar = () => {
                             Home
                         </Link>
                         <Link href="/Pages/homepage" className="text-white hover:text-gray-200">
-                            Questions
+                            Problems
                         </Link>
                         <Link href="/Pages/contestDetails" className="text-white hover:text-gray-200">
                             Contest
@@ -92,7 +95,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     {isToggleProfile &&
-                    <div className="absolute md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-10 flex flex-col items-center">
+                    <div className="absolute  md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-50 flex flex-col items-center">
 
                     <Image
                         src="/profileimage.png"
@@ -101,8 +104,9 @@ const Navbar = () => {
                         height={47}
                     />
                 
-
-                    <h1 className='text-center mt-2 font-bold text-2xl'>username</h1>
+                    
+                    <h1 className='text-center mt-2 font-bold text-2xl'>{userData? userData.username : <div className="animate-spin rounded-full h-7 w-7 border-t-2 border-b-2 border-blue-500"></div>
+                    }</h1>
                     <Link href='/Pages/profile'>
                     <button className="mt-2 bg-white text-blue-500 font-bold px-16 py-2 rounded">
                         View Profile
@@ -121,10 +125,12 @@ const Navbar = () => {
                         <h1 className="font-bold">n</h1>
                     </div>
                 
+                    <div>
+                    <button onClick={handleSignOut} className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded">
+                        Signout <IoExitOutline className='mt-1 ml-2' />
 
-                    <button onClick={handleSignOut} className="mt-4 bg-white text-red-500 px-20 font-bold py-2 rounded">
-                        Signout
                     </button>
+                    </div>
                 </div>
                 
                 }
@@ -150,7 +156,7 @@ const Navbar = () => {
                         Home
                     </Link>
                     <Link href="/Pages/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">
-                        Questions
+                        Problems
                     </Link>
                     <Link href="/Pages/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">
                         Contest
