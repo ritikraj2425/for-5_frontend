@@ -1,7 +1,7 @@
 // src/app/page.jsx
 "use client";
-import { signOut } from 'firebase/auth';
-import { auth } from './lib/fireBaseConfig';
+
+
 import { useRouter } from 'next/navigation';
 import VideoScrollerFeatured from './components/videoScrollerFeatured';
 import AboutSection from './components/aboutSectionLandingPage';

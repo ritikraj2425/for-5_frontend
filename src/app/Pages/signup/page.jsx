@@ -3,80 +3,10 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { auth, provider } from '@/app/lib/fireBaseConfig';
 
 export default function Signup() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName]  =useState('');
-    const [username, setUsername] = useState('');
+   
     const router = useRouter();
-
-
-
-    const handleGoogle = (e) => {
-        e.preventDefault();
-
-        signInWithPopup(auth, provider)
-            .then((data) => {
-                console.log("User signed in:", data.user.email);
-                localStorage.setItem("email", data.user.email);
-                toast.success("Sign-in successful! Redirecting...", {
-                    position: "top-center",
-                    autoClose: 1500,
-                });
-                router.push("/");
-            })
-            .catch((error) => {
-                console.error("Error during sign-in:", error);
-                toast.error("Error during Google sign-in: " + error.message, {
-                    position: "top-center",
-                    autoClose: 1500,
-                });
-            });
-    };
-
-    const handleSignup = async (e) => {
-        e.preventDefault();
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
-
-            const user = userCredential.user;
-
-            const response = await fetch('https://quizprojectserver.vercel.app/post/userDetails', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name,
-                    firebaseID: user.uid,
-                    username,
-                    email: user.email,
-                    bio: "your bio",
-                    location: "your location",
-                    gender: "your gender",
-                }),
-            });
-    
-            if (response.ok) {
-                console.log("User details successfully posted to MongoDB");
-                router.push('/Pages/Login');  
-            } else {
-                console.error("Error posting user details to MongoDB");
-            }
-        } catch (error) {
-            console.error('Error during sign-up:', error);
-            toast.error('Error during sign-up.');
-        }
-    };
-
-
-
-
-    
 
     const handleSignIn = () => {
         router.push('/Pages/Login')
@@ -104,8 +34,7 @@ export default function Signup() {
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+
                             />
                         </div>
                         <div>
@@ -119,8 +48,7 @@ export default function Signup() {
                                 required
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+
                             />
                         </div>
                         <div>
@@ -135,8 +63,7 @@ export default function Signup() {
                                 required
                                 className="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email address"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+
                             />
                         </div>
                         <div>
@@ -151,15 +78,14 @@ export default function Signup() {
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+
                             />
                         </div>
                     </div>
 
                     <div>
                         <button
-                        onClick={handleSignup}
+
                             type="submit"
                             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#E47406] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
