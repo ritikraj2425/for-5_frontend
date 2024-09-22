@@ -1,7 +1,6 @@
-import React from 'react';
+import React from "react";
 import Link from "next/link";
-import { Calendar, Clock, ChevronRight, Search } from 'lucide-react';
-import Navbar from '@/app/components/navbar';
+import { Calendar, Clock, ChevronRight, Search } from "lucide-react";
 
 const ContestCard = ({ title, startTime, endTime, participants, difficulty }) => (
     <div className="bg-gray-800 p-6 rounded-xl shadow-lg w-[300px] flex-shrink-0 snap-start hover:bg-gray-700 transition-colors duration-200">
@@ -18,13 +17,13 @@ const ContestCard = ({ title, startTime, endTime, participants, difficulty }) =>
             <p className="text-sm text-gray-400">{participants} participants</p>
         </div>
         <div className="flex justify-between items-center">
-            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${difficulty === 'Easy' ? 'bg-green-200 text-green-800' :
-                difficulty === 'Medium' ? 'bg-yellow-200 text-yellow-800' :
-                    'bg-red-200 text-red-800'
+            <span className={`px-2 py-1 rounded-full text-xs font-semibold ${difficulty === "Easy" ? "bg-green-200 text-green-800" :
+                difficulty === "Medium" ?"bg-yellow-200 text-yellow-800" :
+                    "bg-red-200 text-red-800"
                 }`}>
                 {difficulty}
             </span>
-            <Link href={'/Pages/contestPage'}>
+            <Link href={"/Pages/contestPage"}>
                 <button className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center">
                     View Details
                     <ChevronRight size={18} className="ml-2" />
@@ -70,10 +69,10 @@ export default function JEEContestDetails() {
                             JEE Contest Arena
                         </h1>
                         <p className="text-xl md:text-2xl text-orange-100">
-                            Challenge yourself with JEE-focused contests and climb the ranks among India's top aspirants.
+                            Challenge yourself with JEE-focused contests and climb the ranks among India&apos;s top aspirants.
                         </p>
                         <div className="flex space-x-4">
-                            <a href='#mainDiv'>
+                            <a href="#mainDiv">
                                 <button className="bg-white text-orange-600 py-3 px-6 rounded-full font-semibold hover:bg-orange-100 transition-colors duration-200">
                                     Explore Contests
                                 </button>
@@ -83,7 +82,7 @@ export default function JEEContestDetails() {
                 </div>
             </header>
 
-            <main className="container mx-auto px-4 py-12" id='mainDiv'>
+            <main className="container mx-auto px-4 py-12" id="mainDiv">
                 <div className="mb-12 flex justify-between items-center">
                     <h2 className="text-4xl font-bold text-white">JEE Contests</h2>
                     <div className="relative">
@@ -122,8 +121,8 @@ export default function JEEContestDetails() {
                                     </svg>
                                 </div>
                                 <div>
-                                <h3 className="text-2xl font-bold mb-2 text-white">Top Performer &apos;#{i}</h3>
-                                <p className="text-sm text-gray-400">Score: {95 - i * 5}</p>
+                                    <p className="font-semibold text-white">Top Performer &apos;#{i}</p>
+                                    <p className="text-sm text-gray-400">Score: {95 - i * 5}</p>
                                 </div>
                             </div>
                         ))}

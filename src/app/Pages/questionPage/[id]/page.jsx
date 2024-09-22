@@ -16,8 +16,7 @@ export default function QuestionPage() {
     useEffect(() => {
         fetch(`https://for5-backend-quiz.vercel.app/api/questions/${id}`)
             .then((response) => response.json())
-            .then((data) => setQuestionData(data))
-            .catch((err) => console.log(err));
+            .then((data) => setQuestionData(data));
     }, [id]);
 
     const toggleStatusDropDown = () => setStatusDropdown(!statusDropdown);

@@ -1,15 +1,11 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
 export default function Reset() {
-    
 
     return (
         <div>
             <h1>Reset Password</h1>
-            <form onSubmit={handleResetPassword}>
+            <form>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input
