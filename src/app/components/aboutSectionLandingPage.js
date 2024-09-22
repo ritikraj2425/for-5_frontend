@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export default function AboutSection() {
@@ -18,8 +19,10 @@ export default function AboutSection() {
                     </div>
                     <div className="lg:w-1/2">
                         <div className="bg-white rounded-lg shadow-2xl overflow-hidden">
-                            <img
+                            <Image
                                 src="/1701422105587.jpeg"
+                                width={800}
+                                height={320}
                                 className="w-full h-80 object-cover object-center"
                                 alt="For5 team"
                             />

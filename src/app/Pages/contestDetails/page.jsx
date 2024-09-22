@@ -19,8 +19,8 @@ const ContestCard = ({ title, startTime, endTime, participants, difficulty }) =>
         </div>
         <div className="flex justify-between items-center">
             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${difficulty === 'Easy' ? 'bg-green-200 text-green-800' :
-                    difficulty === 'Medium' ? 'bg-yellow-200 text-yellow-800' :
-                        'bg-red-200 text-red-800'
+                difficulty === 'Medium' ? 'bg-yellow-200 text-yellow-800' :
+                    'bg-red-200 text-red-800'
                 }`}>
                 {difficulty}
             </span>
@@ -62,7 +62,7 @@ export default function JEEContestDetails() {
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100">
-            <Navbar />
+
             <header className="bg-gradient-to-r from-orange-900 to-orange-700 text-white py-16">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl space-y-6">
@@ -73,14 +73,11 @@ export default function JEEContestDetails() {
                             Challenge yourself with JEE-focused contests and climb the ranks among India's top aspirants.
                         </p>
                         <div className="flex space-x-4">
-                        <a href='#mainDiv'>
-                            <button className="bg-white text-orange-600 py-3 px-6 rounded-full font-semibold hover:bg-orange-100 transition-colors duration-200">
-                                Explore Contests
-                            </button>
-                        </a> 
-                            {/* <button className="bg-transparent border-2 border-white text-white py-3 px-6 rounded-full font-semibold hover:bg-white hover:text-orange-600 transition-colors duration-200">
-                                View Leaderboard
-                            </button> */}
+                            <a href='#mainDiv'>
+                                <button className="bg-white text-orange-600 py-3 px-6 rounded-full font-semibold hover:bg-orange-100 transition-colors duration-200">
+                                    Explore Contests
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -120,16 +117,19 @@ export default function JEEContestDetails() {
                         {[1, 2, 3, 4].map((i) => (
                             <div key={i} className="bg-gray-800 rounded-lg shadow p-6 flex items-center space-x-4">
                                 <div className="bg-orange-100 p-3 rounded-full">
-                                    <svg className="text-white w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <svg className="text-white w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
                                 </div>
                                 <div>
-                                    <p className="font-semibold text-white">Top Performer #{i}</p>
-                                    <p className="text-sm text-gray-400">Score: {95 - i * 5}</p>
+                                <h3 className="text-2xl font-bold mb-2 text-white">Top Performer &apos;#{i}</h3>
+                                <p className="text-sm text-gray-400">Score: {95 - i * 5}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </section>
+
             </main>
 
             <footer className="bg-gray-800 text-gray-300 py-4">

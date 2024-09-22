@@ -7,7 +7,7 @@ export default function Profile() {
 
     return (
         <div className="bg-[#1B1B1B] min-h-screen">
-            <Navbar />
+            {/* <Navbar /> */}
             
             <div className="flex flex-col md:flex-row">
                 <div className="md:w-1/4 w-full">
