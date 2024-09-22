@@ -14,9 +14,7 @@ function Questions() {
             return response.json();
         }).then((data) => {
             setQuestionData(data);
-        }).catch((err) => {
-            console.log("error fetching questions", err)
-        })
+        });
     }, [])
 
 
