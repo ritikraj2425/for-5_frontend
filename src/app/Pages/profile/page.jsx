@@ -5,24 +5,6 @@ import { useState,useEffect } from "react"
 export default function Profile() {
     const[userData,setUserData] = useState();
 
-    useEffect( ()=>{
-        const fetchUserData =async()=>{
-
-            let uid = JSON.parse(localStorage.getItem("uid"));
-            if(!uid){
-                console.log("no uid found");
-            }
-    
-            const response = await fetch(`https://quizprojectserver.vercel.app/get/userDetails?uid=${uid}`);
-            const data = await response.json();
-            console.log(data);
-            setUserData(data)
-        }
-        fetchUserData();
-
-    },[])
-
-
     return (
         <div className="bg-[#1B1B1B] min-h-screen">
             <Navbar />

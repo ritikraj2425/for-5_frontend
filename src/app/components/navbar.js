@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
-import { signOut } from 'firebase/auth';
-import { auth } from '../lib/fireBaseConfig';
 import { useRouter } from 'next/navigation';
 import { IoExitOutline } from "react-icons/io5";
 
@@ -21,37 +19,6 @@ const Navbar = () => {
     }
 
     const router =useRouter();
-
-    const handleSignOut = async () => {
-        try {
-            await signOut(auth);
-            sessionStorage.removeItem('token');
-            router.push('/Pages/Login');
-            console.log("signout happening")
-        } catch (error) {
-            console.error('Error during sign-out:', error);
-        }
-    };
-
-
-    useEffect( ()=>{
-        const fetchUserData =async()=>{
-
-            let uid = JSON.parse(localStorage.getItem("uid"));
-            if(!uid){
-                console.log("no uid found");
-            }
-    
-            const response = await fetch(`https://quizprojectserver.vercel.app/get/userDetails?uid=${uid}`);
-            const data = await response.json();
-            console.log(data);
-            setUserData(data)
-        }
-        fetchUserData();
-
-    },[])
-
-    // console.log(userData,"akdfnadjnf")
 
 
 
@@ -126,7 +93,7 @@ const Navbar = () => {
                     </div>
                 
                     <div>
-                    <button onClick={handleSignOut} className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded">
+                    <button  className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded">
                         Signout <IoExitOutline className='mt-1 ml-2' />
 
                     </button>
