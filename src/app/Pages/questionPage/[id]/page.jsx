@@ -14,7 +14,7 @@ export default function QuestionPage() {
     const [questionData, setQuestionData] = useState([]);
 
     useEffect(() => {
-        fetch(`https://quizprojectserver.vercel.app/api/questions/${id}`)
+        fetch(`https://for5-backend-quiz.vercel.app/api/questions/${id}`)
             .then((response) => response.json())
             .then((data) => setQuestionData(data))
             .catch((err) => console.log(err));
@@ -25,7 +25,7 @@ export default function QuestionPage() {
 
     return (
         <div className="bg-gray-900 min-h-screen text-white">
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="bg-orange-700 shadow-lg">
                 <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center space-x-4">

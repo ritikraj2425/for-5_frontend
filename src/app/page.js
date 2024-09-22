@@ -24,8 +24,6 @@ export default function HomePage() {
     return (
         <div className='bg-black relative min-h-screen w-full '>
             {/* <div className="absolute inset-0 bg-[url('/backgroundWhiteGrid.png')] bg-repeat bg-center opacity-70 "></div> */}
-
-            <Navbar  />
             <div className='relative z-10'>
 
 

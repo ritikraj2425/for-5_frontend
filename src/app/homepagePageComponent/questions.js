@@ -10,7 +10,7 @@ function Questions() {
     const [searchData,setSearchData] = useState('');
 
     useEffect(() => {
-        fetch('https://quizprojectserver.vercel.app/api/questions').then((response) => {
+        fetch('https://for5-backend-quiz.vercel.app/api/questions').then((response) => {
             return response.json();
         }).then((data) => {
             setQuestionData(data);
