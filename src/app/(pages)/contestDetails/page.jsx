@@ -18,12 +18,12 @@ const ContestCard = ({ title, startTime, endTime, participants, difficulty }) =>
         </div>
         <div className="flex justify-between items-center">
             <span className={`px-2 py-1 rounded-full text-xs font-semibold ${difficulty === "Easy" ? "bg-green-200 text-green-800" :
-                difficulty === "Medium" ?"bg-yellow-200 text-yellow-800" :
+                difficulty === "Medium" ? "bg-yellow-200 text-yellow-800" :
                     "bg-red-200 text-red-800"
                 }`}>
                 {difficulty}
             </span>
-            <Link href={"/Pages/contestPage"}>
+            <Link href={"/contestPage"}>
                 <button className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center">
                     View Details
                     <ChevronRight size={18} className="ml-2" />
