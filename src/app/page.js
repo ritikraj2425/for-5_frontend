@@ -18,7 +18,7 @@ export default function HomePage() {
 
 
     const handleGoToProblems = () => {
-        router.push('/Pages/homepage');
+        router.push('/problems');
     }
 
     return (
@@ -30,26 +30,7 @@ export default function HomePage() {
 
 
                 <div className='relative'>
-                    {/* <LampContainer>
-                        <motion.h1
-                            initial={{ opacity: 0.5, y: 100 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{
-                                delay: 0.3,
-                                duration: 0.8,
-                                ease: "easeInOut",
-                            }}
-                            className="mt-80 bg-gradient-to-br  from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-bold text-white tracking-tight text-transparent md:text-7xl"
-                        >
-                            Empower your<br></br> journey <span className='relative inline-block bg-gradient-to-r from-[#E47406] to-white text-black rounded-md  z-10' >with for5</span>
-                        </motion.h1>
-                        <br></br>
-                        <Button borderRadius="1.75rem" onClick={handleGoToProblems}
-                            className="bg-white dark:bg-[#e7eaed] text-black dark:text-black border-neutral-200 dark:border-[#2f90f2] transition-transform duration-300 hover:scale-105" ><span className='font-bold '>Go To Problems</span>
-                        </Button>
-                        
 
-                    </LampContainer> */}
                     <WavyBackground className="max-w-4xl mx-auto pb-40 flex flex-col items-center md:mt-28 justify-center space-y-8">
                         <p className="text-5xl p-2 md:text-6xl  lg:text-8xl text-white font-bold inter-var text-center">
                             Empower your<br />journey with for5

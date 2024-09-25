@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
@@ -18,7 +18,32 @@ const Navbar = () => {
         setIsToggleProfile(!isToggleProfile);
     }
 
+    const handleSignOut =()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
+        router.push('/login')
+        setIsToggleProfile(false);
+
+    }
+
     const router =useRouter();
+
+    const profileRef = useRef();
+
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (profileRef.current && !profileRef.current.contains(event.target)) {
+                setIsToggleProfile(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
 
 
@@ -38,13 +63,13 @@ const Navbar = () => {
                         <Link href="/" className="text-white hover:text-gray-200">
                             Home
                         </Link>
-                        <Link href="/Pages/homepage" className="text-white hover:text-gray-200">
+                        <Link href="/problems" className="text-white hover:text-gray-200">
                             Problems
                         </Link>
-                        <Link href="/Pages/contestDetails" className="text-white hover:text-gray-200">
+                        <Link href="/contestDetails" className="text-white hover:text-gray-200">
                             Contest
                         </Link>
-                        <Link href="/Pages/discussion" className="text-white hover:text-gray-200">
+                        <Link href="/discussion" className="text-white hover:text-gray-200">
                             Discussion
                         </Link>
                     </div>
@@ -62,7 +87,7 @@ const Navbar = () => {
                         </div>
                     </div>
                     {isToggleProfile &&
-                    <div className="absolute  md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-50 flex flex-col items-center">
+                    <div ref={profileRef} className="absolute  md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-50 flex flex-col items-center">
 
                     <Image
                         src="/profileimage.png"
@@ -74,7 +99,7 @@ const Navbar = () => {
                     
                     <h1 className='text-center mt-2 font-bold text-2xl'>{userData? userData.username : <div className="animate-spin rounded-full h-7 w-7 border-t-2 border-b-2 border-blue-500"></div>
                     }</h1>
-                    <Link href='/Pages/profile'>
+                    <Link href='/profile'>
                     <button className="mt-2 bg-white text-blue-500 font-bold px-16 py-2 rounded">
                         View Profile
                     </button>
@@ -93,7 +118,7 @@ const Navbar = () => {
                     </div>
                 
                     <div>
-                    <button  className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded">
+                    <button  className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded" onClick={handleSignOut}>
                         Signout <IoExitOutline className='mt-1 ml-2' />
 
                     </button>
@@ -112,23 +137,18 @@ const Navbar = () => {
                 </div>
             </div>
 
-
-
-
-
-
             {isOpen && (
                 <div className="md:hidden">
                     <Link href="/" className="block text-white py-2 px-4 hover:bg-blue-700">
                         Home
                     </Link>
-                    <Link href="/Pages/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">
+                    <Link href="/problems" className="block text-white py-2 px-4 hover:bg-blue-700">
                         Problems
                     </Link>
-                    <Link href="/Pages/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">
+                    <Link href="/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">
                         Contest
                     </Link>
-                    <Link href="/Pages/discussion" className="block text-white py-2 px-4 hover:bg-blue-700">
+                    <Link href="/discussion" className="block text-white py-2 px-4 hover:bg-blue-700">
                         Discussion
                     </Link>
                     <div className="py-2 px-4">

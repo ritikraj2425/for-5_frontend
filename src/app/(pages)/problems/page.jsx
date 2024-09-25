@@ -5,14 +5,14 @@ import { Calendar, Clock, Book } from "lucide-react";
 export default function HomePage() {
     return (
         <div className="bg-gray-900 min-h-screen text-black">
-            {/* <Navbar /> */}
+
             <div className="md:flex flex-row">
                 <div className="md:w-2/3 w-full min-h-screen">
                     <Questions />
                 </div>
 
                 <div className="md:w-1/3 w-full min-h-screen p-7 space-y-6">
-                    {/* Upcoming Contests */}
+
                     <div className="bg-gray-800 w-full max-w-md mx-auto text-white rounded-xl shadow-lg overflow-hidden">
                         <h1 className="text-center text-2xl font-bold py-4 bg-gradient-to-r from-orange-700 to-orange-900">Upcoming Contests</h1>
                         <hr className="border-t-2 border-gray-700 w-full" />
@@ -28,7 +28,8 @@ export default function HomePage() {
                                     <p>End: 30 Sep 12:00 PM</p>
                                 </div>
                             </div>
-                            <Link href={"/Pages/contestDetails"}>
+                            <br></br>
+                            <Link href={"/contestDetails"}>
                                 <button
                                     aria-label="View contest details"
                                     className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center w-full"
@@ -47,7 +48,8 @@ export default function HomePage() {
                                 <Book size={24} className="text-orange-400" />
                                 <h3 className="text-xl font-semibold text-orange-300">Magnetic force on a moving charge</h3>
                             </div>
-                            <Link href={"/Pages/questionPage/66e60ddda4eadd8fc855540a"}>
+                            <br></br>
+                            <Link href={"/questionPage/66e60ddda4eadd8fc855540a"}>
                                 <button
                                     aria-label="View question"
                                     className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center w-full"

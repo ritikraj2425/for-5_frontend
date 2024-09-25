@@ -2,15 +2,52 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Signup() {
-   
-    const router = useRouter();
 
-    const handleSignIn = () => {
-        router.push('/Pages/Login')
-    }
+    const router = useRouter();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
+    const [username, setUserName] = useState('');
+
+
+    const handleSignUP = async (e) => {
+        e.preventDefault();
+        if(password!=rePassword){
+            toast.error('Password does not match');
+            throw new Error('password not match')
+        }
+        try{
+            const response = await fetch('https://for5-backend-quiz.vercel.app/signup', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name,username,email,password
+                }),
+                headers: {
+                    'content-type': 'application/json'
+                }
+            })
+            const data = await response.json()
+            if(!response.ok){
+                return toast.error('Error',data)
+            }
+
+            localStorage.setItem('token',data.token);
+            localStorage.setItem('refreshToken',data.refresh_token);
+            toast.success('signup successfull');
+            router.push('/problems')
+
+        }catch(err){
+            console.log(err);
+        }
+
+ }
+ const handleSignIN =()=>{
+    router.push('/login')
+ }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -20,9 +57,9 @@ export default function Signup() {
                         Sign Up for an Account
                     </h2>
                 </div>
-                <form className="mt-8 space-y-6" >
+                <form className="mt-8 space-y-6" onSubmit={handleSignUP}>
                     <div className="rounded-md shadow-sm -space-y-px">
-                    <div>
+                        <div>
                             <label htmlFor="email" className="sr-only">
                                 Name
                             </label>
@@ -30,7 +67,7 @@ export default function Signup() {
                                 id="name"
                                 name="name"
                                 type="text"
-
+                                onChange={(e)=>setName(e.target.value)}
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Name"
@@ -46,6 +83,7 @@ export default function Signup() {
                                 name="username"
                                 type="text"
                                 required
+                                onChange={(e)=>setUserName(e.target.value)}
                                 className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="username"
 
@@ -60,6 +98,7 @@ export default function Signup() {
                                 name="email"
                                 type="email"
                                 autoComplete="email"
+                                onChange={(e)=>setEmail(e.target.value)}
                                 required
                                 className="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Email address"
@@ -74,10 +113,25 @@ export default function Signup() {
                                 id="password"
                                 name="password"
                                 type="password"
-                                autoComplete="new-password"
+                                onChange={(e)=>setPassword(e.target.value)}
                                 required
                                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Password"
+
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="password" className="sr-only">
+                                RePassword
+                            </label>
+                            <input
+                                id="repassword"
+                                name="repassword"
+                                type="password"
+                                onChange={(e)=>setRePassword(e.target.value)}
+                                required
+                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="RePassword"
 
                             />
                         </div>
@@ -85,7 +139,6 @@ export default function Signup() {
 
                     <div>
                         <button
-
                             type="submit"
                             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#E47406] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
@@ -96,7 +149,7 @@ export default function Signup() {
 
                 <div className="flex items-center justify-between">
                     <button
-                        onClick={handleSignIn}
+                        onClick={handleSignIN}
                         className="font-medium text-indigo-600 hover:text-indigo-500"
                     >
                         Already have an account? Sign In
