@@ -89,7 +89,7 @@ function Questions() {
                                     
                                     <tr key={item._id} className="cursor-pointer bg-[#5F5F5F] text-[#E7E7E4] ">
 
-                                        <td className="p-3 mt-4 text-orange-200"> <Link href={`/Pages/questionPage/${item._id}`}>{index+1}. {item.questionTitle}</Link></td>
+                                        <td className="p-3 mt-4 text-orange-200"> <Link href={`/questionPage/${item._id}`}>{index+1}. {item.questionTitle}</Link></td>
                                         <td className="p-3">{item.difficulty}</td>
                                         <td className="p-3">Unsolved</td>
                                     </tr>
