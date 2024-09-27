@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Footer from "./components/footer"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }) {
         >
         <Navbar/>
         {children}
+        <Footer/>
         <ToastContainer
                     position="top-right" 
                     autoClose={2000}
@@ -38,6 +40,7 @@ export default function RootLayout({ children }) {
                     pauseOnFocusLoss
  />
       </body>
+     
     </html>
   );
 }
