@@ -50,89 +50,70 @@ export default function Signup() {
  }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full p-11 rounded-md border-2 space-y-8">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                        Sign Up for an Account
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-orange-900">
+            <div className="max-w-md w-full p-8 bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl shadow-2xl border border-orange-500 border-opacity-30 space-y-8">
+                <div className="text-center">
+                    <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">
+                        Create Account
                     </h2>
+                    <p className="mt-2 text-sm text-gray-400">Join our community today</p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSignUP}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label htmlFor="email" className="sr-only">
-                                Name
-                            </label>
+                    <div className="space-y-4">
+                        <div className="relative">
                             <input
                                 id="name"
                                 name="name"
                                 type="text"
-                                onChange={(e)=>setName(e.target.value)}
+                                onChange={(e) => setName(e.target.value)}
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Name"
-
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                                placeholder="Full Name"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="email" className="sr-only">
-                                Username
-                            </label>
+                        <div className="relative">
                             <input
                                 id="username"
                                 name="username"
                                 type="text"
                                 required
-                                onChange={(e)=>setUserName(e.target.value)}
-                                className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="username"
-
+                                onChange={(e) => setUserName(e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                                placeholder="Username"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="email" className="sr-only">
-                                Email address
-                            </label>
+                        <div className="relative">
                             <input
                                 id="email"
                                 name="email"
                                 type="email"
                                 autoComplete="email"
-                                onChange={(e)=>setEmail(e.target.value)}
+                                onChange={(e) => setEmail(e.target.value)}
                                 required
-                                className="appearance-none  relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900  focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
                                 placeholder="Email address"
-
                             />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">
-                                Password
-                            </label>
+                        <div className="relative">
                             <input
                                 id="password"
                                 name="password"
                                 type="password"
-                                onChange={(e)=>setPassword(e.target.value)}
+                                onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
                                 placeholder="Password"
-
                             />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">
-                                RePassword
-                            </label>
+                        <div className="relative">
                             <input
                                 id="repassword"
                                 name="repassword"
                                 type="password"
-                                onChange={(e)=>setRePassword(e.target.value)}
+                                onChange={(e) => setRePassword(e.target.value)}
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="RePassword"
-
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                                placeholder="Confirm Password"
                             />
                         </div>
                     </div>
@@ -140,30 +121,21 @@ export default function Signup() {
                     <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#E47406] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="w-full px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-300 transform hover:scale-105"
                         >
-                            Sign Up
+                            Create Account
                         </button>
                     </div>
                 </form>
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-center text-sm">
                     <button
                         onClick={handleSignIN}
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-orange-500 hover:text-orange-400 transition duration-300"
                     >
                         Already have an account? Sign In
                     </button>
                 </div>
-
-                {/* <div>
-                    <button
-                        onClick={handleGoogle}
-                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-                    >
-                        Sign up with Google
-                    </button>
-                </div> */}
             </div>
         </div>
     );
