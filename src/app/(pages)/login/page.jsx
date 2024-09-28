@@ -46,98 +46,87 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gray-50 sm:px-6 lg:px-8">
-            <div className="w-full max-w-md p-11 space-y-8 border-2 rounded-md">
-                <div>
-                    <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">Login to Your Account</h2>
-                </div>
-                <div className="flex items-center justify-between">
-                    <button
-                        className={`font-bold cursor-pointer ${loginMethod === 'email' ? 'text-indigo-600 hover:text-indigo-500' : 'text-gray-500'
-                            }`}
-                        onClick={() => setLoginMethod('email')}
-                    >
-                        Login with Email
-                    </button>
-                    <button
-                        className={`font-bold cursor-pointer ${loginMethod === 'username' ? 'text-indigo-600 hover:text-indigo-500' : 'text-gray-500'
-                            }`}
-                        onClick={() => setLoginMethod('username')}
-                    >
-                        Login with Username
-                    </button>
-                </div>
+        <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-gray-900 via-gray-800 to-orange-900 sm:px-6 lg:px-8">
+        <div className="w-full max-w-md p-8  bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl shadow-2xl border border-orange-500 border-opacity-30 space-y-8">
+            <div>
+                <h2 className="mt-6 text-3xl font-extrabold text-center text-orange-500">Login to Your Account</h2>
+            </div>
+            <div className="flex items-center justify-between">
+                <button
+                    className={`font-bold cursor-pointer ${loginMethod === 'email' ? 'text-orange-500' : 'text-gray-400 hover:text-orange-400'}`}
+                    onClick={() => setLoginMethod('email')}
+                >
+                    Login with Email
+                </button>
+                <button
+                    className={`font-bold cursor-pointer ${loginMethod === 'username' ? 'text-orange-500' : 'text-gray-400 hover:text-orange-400'}`}
+                    onClick={() => setLoginMethod('username')}
+                >
+                    Login with Username
+                </button>
+            </div>
 
-                <form className="mt-8 space-y-6" onSubmit={handleSignIN}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        {loginMethod === 'username' ? (
-                            <div>
-                                <label htmlFor="username" className="sr-only">
-                                    Username
-                                </label>
-                                <input
-                                    id="username"
-                                    name="username"
-                                    type="text"
-                                    required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Username"
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
-                            </div>
-                        ) : (
-                            <div>
-                                <label htmlFor="email" className="sr-only">
-                                    Email address
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder="Email address"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
-                        )}
-
+            <form className="mt-8 space-y-6" onSubmit={handleSignIN}>
+                <div className="rounded-md shadow-sm -space-y-px">
+                    {loginMethod === 'username' ? (
                         <div>
-                            <label htmlFor="password" className="sr-only">
-                                Password
-                            </label>
                             <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                autoComplete="current-password"
+                                id="username"
+                                name="username"
+                                type="text"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
-                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                                placeholder="Username"
+                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
-                    </div>
+                    ) : (
+                        <div>
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autoComplete="email"
+                                required
+                                className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                                placeholder="Email address"
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    )}
 
                     <div>
-                        <button
-                            type="submit"
-                            className="relative flex justify-center w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#E47406] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 group"
-                        >
-                            Sign In
-                        </button>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="current-password"
+                            required
+                            className="w-full px-4 py-3 bg-gray-800 bg-opacity-50 text-white placeholder-gray-500 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition duration-300"
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
-                </form>
+                </div>
 
-                <div className="flex items-center justify-between">
-                    <button className="font-medium text-indigo-600 hover:text-indigo-500">Forgot Password?</button>
-                    <button onClick={handleNavigateToSignUp} className="font-medium text-indigo-600 hover:text-indigo-500">
-                        Sign Up
+                <div>
+                    <button
+                        type="submit"
+                        className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    >
+                        Sign In
                     </button>
                 </div>
+            </form>
+
+            <div className="flex items-center justify-between">
+                <button className="font-medium text-orange-500 hover:text-orange-400">Forgot Password?</button>
+                <button onClick={handleNavigateToSignUp} className="font-medium text-orange-500 hover:text-orange-400">
+                    Sign Up
+                </button>
             </div>
         </div>
+    </div>
     );
 };
 

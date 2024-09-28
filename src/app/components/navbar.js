@@ -48,7 +48,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="bg-gradient-to-r from-[#1B1B1B] to-orange-500 p-4">
+        <nav className="bg-orange-500 p-4">
             <div className="container mx-auto flex justify-between items-center">
 
                 <Link href="/" className="text-white font-bold text-xl">
@@ -97,7 +97,7 @@ const Navbar = () => {
                     />
                 
                     
-                    <h1 className='text-center mt-2 font-bold text-2xl'>{userData? userData.username : <div className="animate-spin rounded-full h-7 w-7 border-t-2 border-b-2 border-blue-500"></div>
+                    <h1 className='text-center mt-2 font-bold text-2xl'>{userData? userData.username : <div>username</div>
                     }</h1>
                     <Link href='/profile'>
                     <button className="mt-2 bg-white text-blue-500 font-bold px-16 py-2 rounded">

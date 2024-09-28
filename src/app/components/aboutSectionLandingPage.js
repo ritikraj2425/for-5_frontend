@@ -3,6 +3,7 @@ import React from 'react';
 
 export default function AboutSection() {
     return (
+
         <div className="bg-black py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -36,5 +37,6 @@ export default function AboutSection() {
                 </div>
             </div>
         </div>
+        
     );
 }

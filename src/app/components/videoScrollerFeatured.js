@@ -47,15 +47,16 @@ function VideoScrollerFeatured() {
             {videos.map((video) => {
                 const youtubeVideoId = extractYouTubeId(video.link);
                 return (
-                    <a key={video.id} href={video.link} rel="videoLink" className="block flex-shrink-0 md:w-1/3">
+                    <a key={video.id} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
                         {youtubeVideoId ? (
                             <Image
-                                className="w-full h-60 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-white"
+                                className="w-full h-48 md:h-52 lg:h-56 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-white"
                                 src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
                                 alt={`Thumbnail for video ${youtubeVideoId}`}
                                 width={400} // Set a width
                                 height={225} // Set a height
                             />
+                            
                         ) : (
                             <p>Invalid video Link</p>
                         )}

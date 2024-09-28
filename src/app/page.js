@@ -51,7 +51,7 @@ export default function HomePage() {
                 </div>
 
                 <div className=' ml-6' id='featured'>
-                    <h3 className='relative text-4xl font-bold inline-block bg-white text-black rounded-md p-1 z-10'>Featured</h3>
+                    <h3 className='relative text-4xl md:ml-5 font-bold inline-block bg-orange-500 text-white rounded-md p-1 z-10'>Featured</h3>
                     <div>
                         <VideoScrollerFeatured />
                     </div>
@@ -59,7 +59,7 @@ export default function HomePage() {
 
 
                 <div className='mt-8 ml-6' id='learn'>
-                    <h3 className='relative text-4xl font-bold inline-block bg-white text-black rounded-md  p-1 z-10'>Learn</h3>
+                    <h3 className='relative text-4xl md:ml-5 font-bold inline-block bg-orange-500 text-white rounded-md  p-1 z-10'>Learn</h3>
 
                     <div>
                         <VideoScrollerLearn />
