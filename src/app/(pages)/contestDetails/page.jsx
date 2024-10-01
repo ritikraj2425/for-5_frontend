@@ -85,20 +85,20 @@ export default function JEEContestDetails() {
             <main className="container mx-auto px-4 py-12" id="mainDiv">
                 <div className="mb-12 flex justify-between items-center">
                     <h2 className="text-4xl font-bold text-white">JEE Contests</h2>
-                    <div className="relative">
+                    {/* <div className="relative">
                         <input
                             type="text"
                             placeholder="Search contests..."
                             className="pl-10 pr-4 py-2 rounded-full bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500"
                         />
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                    </div>
+                    </div> */}
                 </div>
 
                 <ContestSection title="Upcoming JEE Contests" contests={upcomingContests} />
                 <ContestSection title="Recent JEE Contests" contests={recentContests} />
 
-                <section className="bg-gray-800 text-white rounded-lg p-8 mb-16">
+                {/* <section className="bg-gray-800 text-white rounded-lg p-8 mb-16">
                     <div className="flex flex-col md:flex-row items-center justify-between">
                         <div className="mb-6 md:mb-0 md:mr-6">
                             <h3 className="text-2xl font-bold mb-2 text-white">Ready to ace JEE?</h3>
@@ -108,7 +108,7 @@ export default function JEEContestDetails() {
                             Register Now
                         </button>
                     </div>
-                </section>
+                </section> */}
 
                 <section className="mb-16">
                     <h2 className="text-3xl font-bold tracking-tighter mb-8 text-white">Top JEE Performers</h2>

@@ -12,21 +12,25 @@ import { IoExitOutline } from "react-icons/io5";
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isToggleProfile, setIsToggleProfile] = useState(false);
-    const [userData,setUserData] = useState();
+    const [userData, setUserData] = useState();
 
     const toggleProfile = () => {
         setIsToggleProfile(!isToggleProfile);
     }
 
-    const handleSignOut =()=>{
-        localStorage.removeItem('token');
-        localStorage.removeItem('refreshToken');
-        router.push('/login')
+    const token = typeof window !== 'undefined' ? localStorage.getItem('jwtToken') : null;
+
+
+    const handleSignOut = () => {
+        if (typeof window !== 'undefined') {
+            localStorage.removeItem('jwtToken');
+            localStorage.removeItem('refreshToken');
+        }
+        router.push('/login');
         setIsToggleProfile(false);
+    };
 
-    }
-
-    const router =useRouter();
+    const router = useRouter();
 
     const profileRef = useRef();
 
@@ -75,7 +79,7 @@ const Navbar = () => {
                     </div>
 
 
-                    <div className="hidden md:block">
+                    {token ? <div className="hidden md:block">
                         <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden" >
                             <Image
                                 onClick={toggleProfile}
@@ -85,47 +89,56 @@ const Navbar = () => {
                                 height={33}
                             />
                         </div>
-                    </div>
+                    </div> :
+                        <div className=" overflow-hidden text-white cursor-pointer" >
+                            <Link href={'/login'}>
+                            SignIn
+                            </Link>
+                        </div>
+                    }
+
+
+
                     {isToggleProfile &&
-                    <div ref={profileRef} className="absolute  md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-50 flex flex-col items-center">
+                        <div ref={profileRef} className="absolute  md:mt-80 mt-60 mr-5 left-auto md:right-4 right-0 bg-[#D9D9D9] rounded-md shadow-lg p-4 z-50 flex flex-col items-center">
 
-                    <Image
-                        src="/profileimage.png"
-                        alt="User"
-                        width={47}
-                        height={47}
-                    />
-                
-                    
-                    <h1 className='text-center mt-2 font-bold text-2xl'>{userData? userData.username : <div>username</div>
-                    }</h1>
-                    <Link href='/profile'>
-                    <button className="mt-2 bg-white text-blue-500 font-bold px-16 py-2 rounded">
-                        View Profile
-                    </button>
-                    </Link>
-                
+                            <Image
+                                src="/profileimage.png"
+                                alt="User"
+                                width={47}
+                                height={47}
+                            />
 
-                    <div className="flex justify-between w-full mt-4 px-2">
-                        <h1 className="font-bold">Streak</h1>
-                        <h1 className="font-bold">n days</h1>
-                    </div>
-                
 
-                    <div className="flex justify-between w-full mt-2 px-2">
-                        <h1 className="font-bold">Solved Today</h1>
-                        <h1 className="font-bold">n</h1>
-                    </div>
-                
-                    <div>
-                    <button  className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded" onClick={handleSignOut}>
-                        Signout <IoExitOutline className='mt-1 ml-2' />
+                            <h1 className='text-center mt-2 font-bold text-2xl'>{userData ? userData.username : <div>username</div>
+                            }</h1>
+                            <Link href='/profile'>
+                                <button className="mt-2 bg-white text-blue-500 font-bold px-16 py-2 rounded">
+                                    View Profile
+                                </button>
+                            </Link>
 
-                    </button>
-                    </div>
-                </div>
-                
-                }
+
+                            <div className="flex justify-between w-full mt-4 px-2">
+                                <h1 className="font-bold">Streak</h1>
+                                <h1 className="font-bold">n days</h1>
+                            </div>
+
+
+                            <div className="flex justify-between w-full mt-2 px-2">
+                                <h1 className="font-bold">Solved Today</h1>
+                                <h1 className="font-bold">n</h1>
+                            </div>
+
+                            <div>
+                                <button className="mt-4 bg-white flex text-red-500 px-16 font-bold py-2 rounded" onClick={handleSignOut}>
+                                    Signout <IoExitOutline className='mt-1 ml-2' />
+
+                                </button>
+                            </div>
+                        </div>
+
+                    }
 
 
                     <button

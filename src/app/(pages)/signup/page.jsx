@@ -27,7 +27,8 @@ export default function Signup() {
                     name,username,email,password
                 }),
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'apikey': process.env.NEXT_PUBLIC_API_KEY,
                 }
             })
             const data = await response.json()
@@ -35,8 +36,8 @@ export default function Signup() {
                 return toast.error('Error',data)
             }
 
-            localStorage.setItem('token',data.token);
-            localStorage.setItem('refreshToken',data.refresh_token);
+            localStorage.setItem('jwtToken', data.jwtToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
             toast.success('signup successfull');
             router.push('/problems')
 

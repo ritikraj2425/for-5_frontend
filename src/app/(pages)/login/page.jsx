@@ -20,19 +20,21 @@ const Login = () => {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'apikey': process.env.NEXT_PUBLIC_API_KEY
                 }
             });
 
             const data = await response.json();
             console.log(data.message);
+            console.log(data)
 
             if (!response.ok) {
                 return toast.error(`Error: ${data.message || 'Login failed'}`);
             }
 
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('refreshToken', data.refresh_token);
+            localStorage.setItem('jwtToken', data.jwtToken);
+            localStorage.setItem('refreshToken', data.refreshToken);
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {
