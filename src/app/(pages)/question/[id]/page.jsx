@@ -3,9 +3,8 @@ import { TiThMenu } from "react-icons/ti";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import Link from "next/link";
 import Questions from "@/app/homepagePageComponent/questions";
-import Navbar from '../../../components/navbar'
+import { useRouter } from "next/navigation";
 
 export default function QuestionPage() {
     const [statusDropdown, setStatusDropdown] = useState(false);
@@ -13,18 +12,41 @@ export default function QuestionPage() {
     const [questionList, setQuestionList] = useState(false);
     const [questionData, setQuestionData] = useState([]);
 
+    const router =useRouter();
+
     useEffect(() => {
-        fetch(`https://for5-backend-quiz.vercel.app/api/questions/${id}`)
+        if (typeof window !== 'undefined') {
+        fetch(`https://for5-backend-quiz.vercel.app/allquestions/question/${id}`,{
+            method: 'GET',
+            headers: {
+                'apikey': process.env.NEXT_PUBLIC_API_KEY,
+                'jwttoken': localStorage.getItem('jwtToken'),
+                'refreshtoken':localStorage.getItem('refreshToken')
+            }
+        })
             .then((response) => response.json())
-            .then((data) => setQuestionData(data));
+            .then((data) => setQuestionData(data.result));
+    }
     }, [id]);
+
+    useEffect(()=>{
+        if(typeof window!=='undefined'){
+            const token = localStorage.getItem('jwtToken')
+            if(!token){
+                router.push('/login')
+            }
+        }
+        
+    },[id])
+
+    
 
     const toggleStatusDropDown = () => setStatusDropdown(!statusDropdown);
     const toggleQuestionList = () => setQuestionList(!questionList);
 
     return (
         <div className="bg-gray-900 min-h-screen text-white">
-            {/* <Navbar /> */}
+
             <div className="bg-orange-700 shadow-lg">
                 <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center space-x-4">

@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react';
-import Image from 'next/image'; // Import Image from next/image
+import Image from 'next/image';
+
 
 function VideoScrollerFeatured() {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null); // State to handle errors
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('https://for5-backend-quiz.vercel.app/api/homepageVideoLink/Featured');
+                const response = await fetch('https://for5-backend-quiz.vercel.app/homepage/featured', {
+                    method: 'GET',
+                    headers: {
+                        'apikey': process.env.NEXT_PUBLIC_API_KEY,
+                    }
+                }
+                );
                 const data = await response.json();
                 setVideos(data);
             } catch (err) {
-                setError('Failed to fetch videos'); // Set error state
+                setError('Failed to fetch videos');
             } finally {
                 setLoading(false);
             }
@@ -38,31 +45,33 @@ function VideoScrollerFeatured() {
 
     if (error) {
         return (
-            <div className="text-red-500 text-center">{error}</div> // Show error message
+            <div className="text-red-500 text-center">{error}</div>
         );
     }
 
     return (
         <div className="relative flex space-x-4 mt-5 ml-0 md:ml-5 mx-auto overflow-x-auto">
-            {videos.map((video) => {
+            {videos ? videos.map((video) => {
                 const youtubeVideoId = extractYouTubeId(video.link);
                 return (
                     <a key={video.id} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
                         {youtubeVideoId ? (
                             <Image
-                                className="w-full h-48 md:h-52 lg:h-56 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:scale-105 hover:shadow-white"
+                                className="w-full h-48 md:h-52 lg:h-56 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:shadow-sm hover:-translate-y-1"
                                 src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
                                 alt={`Thumbnail for video ${youtubeVideoId}`}
-                                width={400} // Set a width
-                                height={225} // Set a height
+                                width={400}
+                                height={225}
                             />
-                            
+
                         ) : (
                             <p>Invalid video Link</p>
                         )}
                     </a>
                 );
-            })}
+            }) : <div>loading...</div>}
+
+
         </div>
     );
 }

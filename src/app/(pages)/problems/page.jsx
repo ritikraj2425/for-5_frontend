@@ -1,8 +1,13 @@
+'use client'
 import Link from "next/link";
 import Questions from "../../homepagePageComponent/questions";
 import { Calendar, Clock, Book } from "lucide-react";
+import { useState } from "react";
+
 
 export default function HomePage() {
+
+
     return (
         <div className="bg-gray-900 min-h-screen text-black">
 
@@ -49,7 +54,7 @@ export default function HomePage() {
                                 <h3 className="text-xl font-semibold text-orange-300">Magnetic force on a moving charge</h3>
                             </div>
                             <br></br>
-                            <Link href={"/questionPage/66e60ddda4eadd8fc855540a"}>
+                            <Link href={"/question/66e60ddda4eadd8fc855540a"}>
                                 <button
                                     aria-label="View question"
                                     className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center w-full"
@@ -60,9 +65,10 @@ export default function HomePage() {
                         </div>
                     </div>
 
-                    {/* Calendar Section */}
-                    <div className="bg-gray-800 w-full text-white rounded-xl h-[15rem] p-4">
+
+                    <div className="bg-gray-800 w-full text-white rounded-xl p-4">
                         <h2 className="text-xl font-bold mb-4 text-orange-300">Calendar</h2>
+                        <Calendar/>
                     </div>
                 </div>
             </div>
