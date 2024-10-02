@@ -50,21 +50,20 @@ export default function HomePage() {
 
                 </div>
 
-                <div className=' ml-6' id='featured'>
-                    <h3 className='relative text-4xl md:ml-5 font-bold inline-block bg-orange-500 text-white rounded-md p-1 z-10'>Featured</h3>
-                    <div>
+                <section className="py-12 " id="featured">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-5xl font-bold text-white mb-8">Featured</h2>
                         <VideoScrollerFeatured />
                     </div>
-                </div>
+                </section>
 
 
-                <div className='mt-8 ml-6' id='learn'>
-                    <h3 className='relative text-4xl md:ml-5 font-bold inline-block bg-orange-500 text-white rounded-md  p-1 z-10'>Learn</h3>
-
-                    <div>
+                <section className="" id="featured">
+                    <div className="container mx-auto px-4">
+                        <h2 className="text-5xl font-bold text-white mb-8">Learn</h2>
                         <VideoScrollerLearn />
                     </div>
-                </div>
+                </section>
 
 
                 <div id='about'>

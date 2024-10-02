@@ -37,7 +37,7 @@ function Questions() {
                     console.error('Failed to fetch:', error);
                 });
         }
-    }, [subject, searchData, difficulty,status]);
+    }, [subject, searchData, difficulty, status]);
 
 
     console.log(status);
@@ -97,7 +97,7 @@ function Questions() {
                                 </th>
                                 <th className="p-3 text-left border-b-2">
                                     <select id="status" className="bg-transparent cursor-pointer focus:outline-none"
-                                    onChange={(e) => setStatus(e.target.value)}>
+                                        onChange={(e) => setStatus(e.target.value)}>
                                         <option value="">Status(All)</option>
                                         <option value="solved">solved</option>
                                         <option value="unsolved">Unsolved</option>
@@ -109,22 +109,20 @@ function Questions() {
                         <tbody>
                             {questionData.result.map((item, index) => (
                                 <>
-                                    <tr key={index} className="md:h-7 h-4"></tr>
-
+                                    <tr key={`${item._id}-empty`} className="md:h-7 h-4"></tr> {/* This empty row will maintain the structure */}
                                     <tr key={item._id} className="cursor-pointer bg-[#c8c3c3] text-gray-900 ">
-
-                                        <td className="p-3 mt-4 text-gray-900  font-semibold"> <Link href={`/question/${item._id}`}>{index + 1}. {item.questionTitle}</Link></td>
+                                        <td className="p-3 mt-4 text-gray-900 font-semibold">
+                                            <Link href={`/question/${item._id}`}>
+                                                {index + 1}. {item.questionTitle}
+                                            </Link>
+                                        </td>
                                         <td className="p-3">{item.difficulty}</td>
                                         <td className="p-3">Unsolved</td>
                                     </tr>
-
                                 </>
-
                             ))}
-
-
-
                         </tbody>
+
                     </table> : <div className="animate-spin rounded-full h-7 w-7 ml-96 mt-32 border-t-2 border-b-2 border-orange-500"></div>}
             </div>
 
