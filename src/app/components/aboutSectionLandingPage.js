@@ -26,7 +26,9 @@ export default function AboutSection() {
                                 height={320}
                                 className="w-full h-80 object-cover object-center"
                                 alt="For5 team"
+                                
                             />
+
                             <div className="p-6">
                                 <p className="text-gray-800 font-semibold text-center">
                                     Ritik and Amod here to help JEE aspirants.
@@ -37,6 +39,6 @@ export default function AboutSection() {
                 </div>
             </div>
         </div>
-        
+
     );
 }

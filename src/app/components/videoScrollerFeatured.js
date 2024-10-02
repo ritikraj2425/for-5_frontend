@@ -51,10 +51,10 @@ function VideoScrollerFeatured() {
 
     return (
         <div className="relative flex space-x-4 mt-5 ml-0 md:ml-5 mx-auto overflow-x-auto">
-            {videos ? videos.map((video) => {
+            {videos ? videos.map((video,index) => {
                 const youtubeVideoId = extractYouTubeId(video.link);
                 return (
-                    <a key={video.id} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
+                    <a key={index} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
                         {youtubeVideoId ? (
                             <Image
                                 className="w-full h-48 md:h-52 lg:h-56 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:shadow-sm hover:-translate-y-1"

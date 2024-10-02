@@ -109,7 +109,7 @@ function Questions() {
                         <tbody>
                             {questionData.result.map((item, index) => (
                                 <>
-                                    <tr className="md:h-7 h-4"></tr>
+                                    <tr key={index} className="md:h-7 h-4"></tr>
 
                                     <tr key={item._id} className="cursor-pointer bg-[#c8c3c3] text-gray-900 ">
 

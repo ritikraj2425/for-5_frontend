@@ -43,22 +43,23 @@ export default function VideoScrollerLearn() {
     }
 
     if (error) {
-        return <div className="text-red-500 text-center">{error}</div>; // Show error message
+        return <div className="text-red-500 text-center">{error}</div>;
     }
 
     return (
         <div className="flex space-x-4 mt-5 ml-0 md:ml-5 mx-auto overflow-x-auto">
-            {videos.map((video) => {
+            {videos.map((video,index) => {
                 const youtubeVideoId = extractYouTubeId(video.link);
                 return (
-                    <a key={video.id} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
+                    <a key={index} href={video.link} rel="videoLink" className="block flex-shrink-0 w-72 md:w-80 lg:w-96">
                         {youtubeVideoId ? (
                             <Image
                                 className="w-full h-48 md:h-52 lg:h-56 border-4 border-gray-300 object-cover rounded-lg shadow-2xl transition-transform duration-300 hover:-translate-y-1 hover:shadow-sm"
                                 src={`https://img.youtube.com/vi/${youtubeVideoId}/hqdefault.jpg`}
                                 alt={`Thumbnail for video ${youtubeVideoId}`}
-                                width={400} // Set a width
-                                height={225} // Set a height
+                                width={400}
+                                height={225}
+
                             />
                         ) : (
                             <p>Invalid video Link</p>
