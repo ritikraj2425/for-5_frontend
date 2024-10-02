@@ -36,10 +36,10 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 export default function Profile() {
     const [userData, setUserData] = useState(mockUserData);
 
-    useEffect(() => {
-        // Fetch user data here
-        // setUserData(fetchedData)
-    }, []);
+    // useEffect(() => {
+    //     // Fetch user data here
+    //     // setUserData(fetchedData)
+    // }, []);
 
     const pieData = [
         { name: 'Physics', value: userData.physicsSolved },
