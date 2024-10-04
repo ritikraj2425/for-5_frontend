@@ -5,23 +5,23 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { BookOpen, Target, Calendar, Brain, FileText, Award } from 'lucide-react'
 
 const mockUserData = {
-    name: "Rahul Sharma",
-    username: "rahul2024",
+    name: "Name",
+    username: "Username",
     title: "JEE Aspirant",
     bio: "Passionate about Physics and Mathematics. Aiming for IIT Bombay!",
-    totalSolved: 1500,
-    physicsSolved: 500,
-    chemSolved: 400,
-    mathSolved: 600,
-    ranking: 1034,
-    testsSolved: 25,
+    totalProblems: 50,
+    physicsSolved: 3,
+    chemSolved: 2,
+    mathSolved: 1,
+    ranking: 40,
+    testsGiven: 0,
     streak: [
-        { month: 'Jan', hours: 120 },
-        { month: 'Feb', hours: 140 },
-        { month: 'Mar', hours: 100 },
-        { month: 'Apr', hours: 160 },
-        { month: 'May', hours: 150 },
-        { month: 'Jun', hours: 130 },
+        { month: 'May', hours: 120 },
+        { month: 'June', hours: 140 },
+        { month: 'July', hours: 100 },
+        { month: 'Aug', hours: 160 },
+        { month: 'Sept', hours: 150 },
+        { month: 'Oct', hours: 10 },
     ],
     recentTests: [
         { name: "JEE Main Mock Test 1", score: "220/300", percentile: 98.5 },
@@ -36,10 +36,6 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 export default function Profile() {
     const [userData, setUserData] = useState(mockUserData);
 
-    // useEffect(() => {
-    //     // Fetch user data here
-    //     // setUserData(fetchedData)
-    // }, []);
 
     const pieData = [
         { name: 'Physics', value: userData.physicsSolved },
@@ -51,7 +47,7 @@ export default function Profile() {
         <div className="bg-gray-900 min-h-screen text-gray-100">
             <div className="container mx-auto px-4 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    {/* Left column: User info */}
+
                     <div className="lg:col-span-1">
                         <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
                             <div className="flex flex-col items-center">
@@ -77,14 +73,14 @@ export default function Profile() {
                         </div>
                     </div>
 
-                    {/* Middle column: Stats and charts */}
+
                     <div className="lg:col-span-2">
                         <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
                             <h2 className="text-2xl font-bold mb-4 flex items-center"><Award className="mr-2" /> JEE Preparation Statistics</h2>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                                <StatCard title="Total Problems" value={userData.totalSolved} icon={<Target className="h-6 w-6" />} />
+                                <StatCard title="Total Problems" value={userData.totalProblems} icon={<Target className="h-6 w-6" />} />
                                 <StatCard title="All India Rank" value={`#${userData.ranking}`} icon={<Award className="h-6 w-6" />} />
-                                <StatCard title="Tests Taken" value={userData.testsSolved} icon={<FileText className="h-6 w-6" />} />
+                                <StatCard title="Tests Given" value={userData.testsGiven} icon={<FileText className="h-6 w-6" />} />
                                 <StatCard title="Study Streak" value={`${userData.streak[userData.streak.length - 1].hours} hrs`} icon={<Calendar className="h-6 w-6" />} />
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

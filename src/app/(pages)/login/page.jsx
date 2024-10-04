@@ -26,8 +26,8 @@ const Login = () => {
             });
 
             const data = await response.json();
-            console.log(data.message);
-            console.log(data)
+
+
 
             if (!response.ok) {
                 return toast.error(`Error: ${data.message || 'Login failed'}`);
@@ -38,7 +38,7 @@ const Login = () => {
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {
-            console.log(err);
+
             toast.error('An unexpected error occurred.');
         }
     };

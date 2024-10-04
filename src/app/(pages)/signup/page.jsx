@@ -42,7 +42,7 @@ export default function Signup() {
             router.push('/problems')
 
         }catch(err){
-            console.log(err);
+            toast.error(err);
         }
 
  }
