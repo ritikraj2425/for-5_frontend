@@ -34,13 +34,13 @@ function Questions() {
                     setQuestionData(data);
                 })
                 .catch((error) => {
-                    console.error('Failed to fetch:', error);
+                    toast.error('Failed to fetch:', error);
                 });
         }
     }, [subject, searchData, difficulty, status]);
 
 
-    console.log(status);
+
 
     return (
         <>
@@ -109,7 +109,7 @@ function Questions() {
                         <tbody>
                             {questionData.result.map((item, index) => (
                                 <>
-                                    <tr key={`${item._id}-empty`} className="md:h-7 h-4"></tr> {/* This empty row will maintain the structure */}
+                                    <tr key={`${item._id}-empty`} className="md:h-7 h-4"></tr> 
                                     <tr key={item._id} className="cursor-pointer bg-[#c8c3c3] text-gray-900 ">
                                         <td className="p-3 mt-4 text-gray-900 font-semibold">
                                             <Link href={`/question/${item._id}`}>

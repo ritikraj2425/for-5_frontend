@@ -46,14 +46,14 @@ const ContestSection = ({ title, contests }) => (
 
 export default function JEEContestDetails() {
     const upcomingContests = [
-        { title: "JEE Main Challenge #1", startTime: "30 Sep 9:00 AM", endTime: "30 Sep 12:00 PM", participants: 1500, difficulty: "Medium" },
-        { title: "Physics Olympiad Prep", startTime: "2 Oct 10:00 AM", endTime: "2 Oct 1:00 PM", participants: 2000, difficulty: "Hard" },
+        { title: "JEE Main Challenge #1", startTime: "30 oct 9:00 AM", endTime: "30 oct 12:00 PM", participants: 1500, difficulty: "Medium" },
+        { title: "Physics Olympiad Prep", startTime: "2 nov 10:00 AM", endTime: "2 nov 1:00 PM", participants: 2000, difficulty: "Hard" },
         { title: "Chemistry Concepts Quiz", startTime: "5 Oct 2:00 PM", endTime: "5 Oct 4:00 PM", participants: 1000, difficulty: "Easy" },
-        { title: "Math Marathon", startTime: "8 Oct 9:00 AM", endTime: "8 Oct 3:00 PM", participants: 1800, difficulty: "Medium" },
+        { title: "Math Marathon", startTime: "26 Oct 9:00 AM", endTime: "26 Oct 3:00 PM", participants: 1800, difficulty: "Medium" },
     ];
 
     const recentContests = [
-        { title: "JEE Advanced Simulation", startTime: "25 Sep 9:00 AM", endTime: "25 Sep 12:00 PM", participants: 1200, difficulty: "Hard" },
+        { title: "JEE Advanced Simulation", startTime: "25 sep 9:00 AM", endTime: "25 Sep 12:00 PM", participants: 1200, difficulty: "Hard" },
         { title: "NCERT Mastery Test", startTime: "27 Sep 3:00 PM", endTime: "27 Sep 5:00 PM", participants: 1800, difficulty: "Medium" },
         { title: "Organic Chemistry Sprint", startTime: "28 Sep 11:00 AM", endTime: "28 Sep 2:00 PM", participants: 1600, difficulty: "Medium" },
         { title: "Mechanics Problem Solving", startTime: "29 Sep 10:00 AM", endTime: "29 Sep 1:00 PM", participants: 1400, difficulty: "Hard" },
