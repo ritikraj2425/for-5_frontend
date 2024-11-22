@@ -56,7 +56,6 @@ const Navbar = () => {
                         <Link href="/problems" className="text-white hover:text-gray-200">Problems</Link>
                         <Link href="/contestDetails" className="text-white hover:text-gray-200">Contest</Link>
                         <Link href="/discussion" className="text-white hover:text-gray-200">Discussion</Link>
-                        <Link href="/profile" className="text-white hover:text-gray-200">Profile</Link>
                     </div>
 
                     {token ? (
@@ -112,7 +111,6 @@ const Navbar = () => {
                     <Link href="/problems" className="block text-white py-2 px-4 hover:bg-blue-700">Problems</Link>
                     <Link href="/contestDetails" className="block text-white py-2 px-4 hover:bg-blue-700">Contest</Link>
                     <Link href="/discussion" className="block text-white py-2 px-4 hover:bg-blue-700">Discussion</Link>
-                    <Link href="/profile" className="block text-white py-2 px-4 hover:bg-blue-700">Profile</Link>
                     <div className="py-2 px-4">
                         <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden">
                             <Image src="/profileimage.png" alt="User" width={34} height={34} onClick={toggleProfile} />

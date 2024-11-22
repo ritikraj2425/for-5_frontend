@@ -11,12 +11,13 @@ function Questions() {
     const [status, setStatus] = useState('');
     const [searchData, setSearchData] = useState('');
     const [questionData, setQuestionData] = useState([]);
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
 
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            fetch(`https://for5-backend-quiz.vercel.app/allquestions?subject=${subject}&search=${searchData}&difficulty=${difficulty}&status=${status}`, {
+            fetch(`${backend_url}/allquestions?subject=${subject}&search=${searchData}&difficulty=${difficulty}&status=${status}`, {
                 method: 'GET',
                 headers: {
                     'apikey': process.env.NEXT_PUBLIC_API_KEY,
@@ -45,7 +46,7 @@ function Questions() {
     return (
         <>
 
-            <div className="ml-4 md:ml-12 mt-2 flex flex-col md:flex-row items-start md:items-center">
+            <div className="ml-4 md:ml-12 flex flex-col md:flex-row items-start md:items-center">
                 <div className="mt-3 w-full md:w-auto">
                     <div className="relative">
                         <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2" />

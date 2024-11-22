@@ -14,6 +14,7 @@ export default function QuestionPage() {
     const [questionList, setQuestionList] = useState(false);
     const [questionData, setQuestionData] = useState([]);
     const [optionSelected, setOptionSelected] = useState('');
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
 
 
@@ -22,7 +23,7 @@ export default function QuestionPage() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            fetch(`https://for5-backend-quiz.vercel.app/allquestions/question/${id}`, {
+            fetch(`${backend_url}/allquestions/question/${id}`, {
                 method: 'GET',
                 headers: {
                     'apikey': process.env.NEXT_PUBLIC_API_KEY,
@@ -47,15 +48,17 @@ export default function QuestionPage() {
 
     const handleOptionClick = (index) => {
         let option = String.fromCharCode(65 + index)
-        setOptionSelected((optionSelected==option)?'':option);
+        setOptionSelected(prevOption => prevOption === option ? '' : option);
+
     }
+
 
 
     const handleCheck = async () => {
         if (typeof window !== 'undefined') {
             
             
-            const response = await fetch(`https://for5-backend-quiz.vercel.app/allquestions/check/${id}`, {
+            const response = await fetch(`${backend_url}/allquestions/check/${id}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     selected: optionSelected
@@ -78,9 +81,6 @@ export default function QuestionPage() {
             }else{
                 toast.error('Wrong Answer')
             }
-
-
-
         }
     }
 
@@ -90,7 +90,6 @@ export default function QuestionPage() {
 
     return (
         <div className="bg-gray-900 min-h-screen text-white">
-
             <div className="bg-orange-700 shadow-lg">
                 <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center space-x-4">
@@ -124,7 +123,6 @@ export default function QuestionPage() {
                 <div
                     className={`h-full ms:w-full text-black ml-h-40% md:overflow-y-auto z-10 absolute mt-3 bg-gray-900 p-5 max-h-[calc(100vh)] overflow-x-auto 
         transform transition-transform duration-1000 ease-in-out ${questionList ? "translate-x-0" : "-translate-x-full"}
-        
     `}
                 >
                     <Questions />
