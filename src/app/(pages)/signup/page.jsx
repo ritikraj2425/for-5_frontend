@@ -12,6 +12,7 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
     const [username, setUserName] = useState('');
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
 
     const handleSignUP = async (e) => {
@@ -21,7 +22,7 @@ export default function Signup() {
             throw new Error('password not match')
         }
         try{
-            const response = await fetch('https://for5-backend-quiz.vercel.app/signup', {
+            const response = await fetch(`${backend_url}/signup`, {
                 method: 'POST',
                 body: JSON.stringify({
                     name,username,email,password

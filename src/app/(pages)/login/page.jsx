@@ -1,7 +1,8 @@
 'use client';
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
+
 
 const Login = () => {
     const router = useRouter();
@@ -9,14 +10,16 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-
+    // const ThemeContext = createContext(null);
+    // const [isLogIn, setIsLogIn] = useState(false);
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
     const handleSignIN = async (e) => {
         e.preventDefault();
 
         const obj = loginMethod === 'username' ? { username, password } : { email, password };
 
         try {
-            const response = await fetch('https://for5-backend-quiz.vercel.app/login', {
+            const response = await fetch(`${backend_url}/login`, {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -35,6 +38,7 @@ const Login = () => {
 
             localStorage.setItem('jwtToken', data.jwtToken);
             localStorage.setItem('refreshToken', data.refreshToken);
+            setIsLogIn(true);
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {

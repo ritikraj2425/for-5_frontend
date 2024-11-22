@@ -48,11 +48,12 @@ const VideoScrollerFeatured = () => {
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await fetch('https://for5-backend-quiz.vercel.app/homepage/featured', {
+                const response = await fetch(`${backend_url}/homepage/featured`, {
                     method: 'GET',
                     headers: {
                         'apikey': process.env.NEXT_PUBLIC_API_KEY,
