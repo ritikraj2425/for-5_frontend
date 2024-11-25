@@ -38,11 +38,11 @@ const Login = () => {
 
             localStorage.setItem('jwtToken', data.jwtToken);
             localStorage.setItem('refreshToken', data.refreshToken);
-            setIsLogIn(true);
+
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {
-
+            console.log(err);
             toast.error('An unexpected error occurred.');
         }
     };
