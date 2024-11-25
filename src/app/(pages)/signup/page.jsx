@@ -34,7 +34,8 @@ export default function Signup() {
             })
             const data = await response.json()
             if(!response.ok){
-                return toast.error('Error',data)
+                console.log(data)
+                return toast.error('Error',data.message)
             }
 
             localStorage.setItem('jwtToken', data.jwtToken);
