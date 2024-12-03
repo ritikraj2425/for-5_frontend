@@ -4,6 +4,7 @@ import Navbar from "./components/navbar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from "./components/footer"
+import { ThemeProvider } from "./context/usecontext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,6 +25,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <ThemeProvider>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
@@ -40,7 +42,7 @@ export default function RootLayout({ children }) {
                     pauseOnFocusLoss
  />
       </body>
-     
+      </ThemeProvider>
     </html>
   );
 }
