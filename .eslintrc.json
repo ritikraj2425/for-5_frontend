@@ -1,8 +1,7 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "react-hooks/exhaustive-deps": "off", // Disable exhaustive-deps rule
-    "no-console": "warn" // Example of another rule you might want to adjust
-    // Add other rules you want to disable or customize here
+    "react-hooks/exhaustive-deps": "off",
+    "no-console": "warn"
   }
 }

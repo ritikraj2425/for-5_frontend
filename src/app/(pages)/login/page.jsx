@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import {ThemeContext} from '../../context/usecontext';
-import { load } from 'cheerio';
+
 
 const Login = () => {
     const {handleSignInContext} = useContext(ThemeContext);
@@ -39,7 +39,7 @@ const Login = () => {
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {
-            console.log(err);
+
             toast.error('An unexpected error occurred.');
         }
     };
