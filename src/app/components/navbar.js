@@ -1,16 +1,22 @@
 'use client';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useContext } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { IoExitOutline } from "react-icons/io5";
+import {ThemeContext} from '../context/usecontext';
+
+
 
 const Navbar = () => {
+
+    const {handleSignOutContext,signIn} = useContext(ThemeContext);
+
     const [isOpen, setIsOpen] = useState(false);
     const [isToggleProfile, setIsToggleProfile] = useState(false);
     const [userData, setUserData] = useState();
-    const [token, setToken] = useState(null);
+
 
     const router = useRouter();
     const profileRef = useRef();
@@ -22,14 +28,12 @@ const Navbar = () => {
     const handleSignOut = () => {
         localStorage.removeItem('jwtToken');
         localStorage.removeItem('refreshToken');
+        handleSignOutContext();
         router.push('/login');
         setIsToggleProfile(false);
     };
 
     useEffect(() => {
-        const jwtToken = localStorage.getItem('jwtToken');
-        setToken(jwtToken);
-
         const handleClickOutside = (event) => {
             if (profileRef.current && !profileRef.current.contains(event.target)) {
                 setIsToggleProfile(false);
@@ -44,7 +48,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className="bg-orange-500 p-4">
+        <nav className="bg-[#FF8C00] p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <Link href="/" className="text-white font-bold text-xl">
                     Logo
@@ -58,7 +62,7 @@ const Navbar = () => {
                         <Link href="/discussion" className="text-white hover:text-gray-200">Discussion</Link>
                     </div>
 
-                    {token ? (
+                    {signIn ? (
                         <div className="hidden md:block">
                             <div className="w-8 h-8 bg-gray-300 rounded-full overflow-hidden">
                                 <Image

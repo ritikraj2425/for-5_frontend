@@ -1,31 +1,34 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-
+import { ThemeContext } from '../../context/usecontext';
 
 export default function Signup() {
-
+    const { handleSignInContext } = useContext(ThemeContext);
     const router = useRouter();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rePassword, setRePassword] = useState('');
     const [username, setUserName] = useState('');
+    const [loading, setLoading] = useState(false);
+
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
 
     const handleSignUP = async (e) => {
         e.preventDefault();
-        if(password!=rePassword){
+        setLoading(true)
+        if (password != rePassword) {
             toast.error('Password does not match');
             throw new Error('password not match')
         }
-        try{
+        try {
             const response = await fetch(`${backend_url}/signup`, {
                 method: 'POST',
                 body: JSON.stringify({
-                    name,username,email,password
+                    name, username, email, password
                 }),
                 headers: {
                     'content-type': 'application/json',
@@ -33,24 +36,26 @@ export default function Signup() {
                 }
             })
             const data = await response.json()
-            if(!response.ok){
+            if (!response.ok) {
                 console.log(data)
-                return toast.error('Error',data.message)
+                return toast.error('Error', data.message)
             }
 
             localStorage.setItem('jwtToken', data.jwtToken);
             localStorage.setItem('refreshToken', data.refreshToken);
+            setLoading(false);
+            handleSignInContext();
             toast.success('signup successfull');
             router.push('/problems')
 
-        }catch(err){
+        } catch (err) {
             toast.error(err);
         }
 
- }
- const handleSignIN =()=>{
-    router.push('/login')
- }
+    }
+    const handleSignIN = () => {
+        router.push('/login')
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-orange-900">
@@ -126,7 +131,7 @@ export default function Signup() {
                             type="submit"
                             className="w-full px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg hover:from-orange-600 hover:to-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-300 transform hover:scale-105"
                         >
-                            Create Account
+                            {loading ? "Loading..." : "Create Account"}
                         </button>
                     </div>
                 </form>

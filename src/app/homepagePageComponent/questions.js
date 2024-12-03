@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { toast } from 'react-toastify';
 import Link from "next/link";
 function Questions() {
 
@@ -35,6 +36,7 @@ function Questions() {
                     setQuestionData(data);
                 })
                 .catch((error) => {
+                    console.log(error)
                     toast.error('Failed to fetch:', error);
                 });
         }

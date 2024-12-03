@@ -1,23 +1,24 @@
 'use client';
-import { createContext, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
-
+import {ThemeContext} from '../../context/usecontext';
+import { load } from 'cheerio';
 
 const Login = () => {
+    const {handleSignInContext} = useContext(ThemeContext);
     const router = useRouter();
     const [loginMethod, setLoginMethod] = useState('email');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    // const ThemeContext = createContext(null);
-    // const [isLogIn, setIsLogIn] = useState(false);
+    const [loading,setLoading] = useState(false);
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
     const handleSignIN = async (e) => {
+
         e.preventDefault();
-
+        setLoading(true)
         const obj = loginMethod === 'username' ? { username, password } : { email, password };
-
         try {
             const response = await fetch(`${backend_url}/login`, {
                 method: 'POST',
@@ -27,18 +28,14 @@ const Login = () => {
                     'apikey': process.env.NEXT_PUBLIC_API_KEY
                 }
             });
-
             const data = await response.json();
-
-
-
             if (!response.ok) {
                 return toast.error(`Error: ${data.message || 'Login failed'}`);
             }
-
             localStorage.setItem('jwtToken', data.jwtToken);
             localStorage.setItem('refreshToken', data.refreshToken);
-
+            handleSignInContext();
+            setLoading(false);
             toast.success('Signin successful');
             router.push('/problems');
         } catch (err) {
@@ -46,11 +43,9 @@ const Login = () => {
             toast.error('An unexpected error occurred.');
         }
     };
-
     const handleNavigateToSignUp = () => {
         router.push('/signup');
     };
-
     return (
         <div className="flex items-center justify-center min-h-screen px-4 py-12 bg-gradient-to-br from-gray-900 via-gray-800 to-orange-900 sm:px-6 lg:px-8">
         <div className="w-full max-w-md p-8  bg-black bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl shadow-2xl border border-orange-500 border-opacity-30 space-y-8">
@@ -100,7 +95,6 @@ const Login = () => {
                             />
                         </div>
                     )}
-
                     <div>
                         <input
                             id="password"
@@ -120,7 +114,7 @@ const Login = () => {
                         type="submit"
                         className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
                     >
-                        Sign In
+                        {loading?"Loading...":"Sign In"}
                     </button>
                 </div>
             </form>
