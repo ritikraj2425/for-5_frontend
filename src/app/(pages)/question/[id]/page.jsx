@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { TiThMenu } from "react-icons/ti";
 import { toast } from 'react-toastify';
+import { useContext } from "react";
+import { ThemeContext } from "@/app/context/usecontext";
 
 
 
@@ -16,7 +18,7 @@ export default function QuestionPage() {
     const [optionSelected, setOptionSelected] = useState('');
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
 
-
+    const { signIn } = useContext(ThemeContext)
 
 
     const router = useRouter();
@@ -37,12 +39,11 @@ export default function QuestionPage() {
     }, [id]);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const token = localStorage.getItem('jwtToken')
-            if (!token) {
+        
+            if (!signIn) {
                 router.push('/login')
             }
-        }
+        
 
     }, [router])
 

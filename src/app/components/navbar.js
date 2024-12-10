@@ -11,12 +11,18 @@ import {ThemeContext} from '../context/usecontext';
 
 const Navbar = () => {
 
-    const {handleSignOutContext,signIn} = useContext(ThemeContext);
+    const {handleSignOutContext,signIn,handleSignInContext} = useContext(ThemeContext);
 
     const [isOpen, setIsOpen] = useState(false);
     const [isToggleProfile, setIsToggleProfile] = useState(false);
     const [userData, setUserData] = useState();
 
+    useEffect(()=>{
+        const token = localStorage.getItem('jwtToken');
+        if(token){
+            handleSignInContext();
+        }
+    },[])
 
     const router = useRouter();
     const profileRef = useRef();
