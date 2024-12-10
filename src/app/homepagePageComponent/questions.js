@@ -113,8 +113,8 @@ function Questions() {
                             {questionData.result.map((item, index) => (
                                 <>
                                     <tr key={`${item._id}-empty`} className="md:h-7 h-4"></tr> 
-                                    <tr key={item._id} className="cursor-pointer bg-[#c8c3c3] text-gray-900 ">
-                                        <td className="p-3 mt-4 text-gray-900 font-semibold">
+                                    <tr key={item._id} className=" bg-[#c8c3c3] text-gray-900 ">
+                                        <td className="p-3 mt-4 text-gray-900 font-semibold cursor-pointer">
                                             <Link href={`/question/${item._id}`}>
                                                 {index + 1}. {item.questionTitle}
                                             </Link>

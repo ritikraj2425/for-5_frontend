@@ -33,8 +33,25 @@ const mockUserData = {
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
+
+
 export default function Profile() {
     const [userData, setUserData] = useState(mockUserData);
+    // const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
+    // const [apiData,setApiData]  =useState();
+
+    // useEffect(()=>{
+    //     fetch(`${backend_url}/user/details`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'apikey': process.env.NEXT_PUBLIC_API_KEY,
+    //             'jwttoken': localStorage.getItem('jwtToken'),
+    //             'refreshtoken': localStorage.getItem('refreshToken')
+    //         }
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => setApiData(data.result));
+    // },[])
 
 
     const pieData = [

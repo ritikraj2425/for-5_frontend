@@ -2,10 +2,12 @@
 import Link from "next/link";
 import Questions from "../../homepagePageComponent/questions";
 import { Calendar, Clock, Book } from "lucide-react";
-import { useState } from "react";
+import { useContext } from "react";
+import { ThemeContext } from "@/app/context/usecontext";
 
 
 export default function HomePage() {
+    const { signIn } = useContext(ThemeContext)
 
 
     return (
@@ -54,7 +56,7 @@ export default function HomePage() {
                                 <h3 className="text-xl font-semibold text-orange-300">Magnetic force on a moving charge</h3>
                             </div>
                             <br></br>
-                            <Link href={"/question/66e60ddda4eadd8fc855540a"}>
+                            <Link href={signIn ?  "/question/66e60ddda4eadd8fc855540a": '/login'}>
                                 <button
                                     aria-label="View question"
                                     className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors duration-200 flex items-center justify-center w-full"
