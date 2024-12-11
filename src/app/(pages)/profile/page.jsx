@@ -1,18 +1,18 @@
 'use client'
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState, useEffect,useContext } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { BookOpen, Target, Calendar, Brain, FileText, Award } from 'lucide-react'
+import { ThemeContext } from "@/app/context/usecontext"
+
 
 const mockUserData = {
-    name: "Name",
-    username: "Username",
     title: "JEE Aspirant",
     bio: "Passionate about Physics and Mathematics. Aiming for IIT Bombay!",
-    totalProblems: 50,
-    physicsSolved: 3,
-    chemSolved: 2,
-    mathSolved: 1,
+    totalProblems: 3,
+    physicsSolved: 12,
+    chemSolved: 10,
+    mathSolved: 9,
     ranking: 40,
     testsGiven: 0,
     streak: [
@@ -37,27 +37,48 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 
 export default function Profile() {
     const [userData, setUserData] = useState(mockUserData);
-    // const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
-    // const [apiData,setApiData]  =useState();
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
+    const [apiData,setApiData]  =useState();
+    const {signIn} = useContext(ThemeContext);
+    const [hydrated, setHydrated] = useState(false);
 
-    // useEffect(()=>{
-    //     fetch(`${backend_url}/user/details`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'apikey': process.env.NEXT_PUBLIC_API_KEY,
-    //             'jwttoken': localStorage.getItem('jwtToken'),
-    //             'refreshtoken': localStorage.getItem('refreshToken')
-    //         }
-    //     })
-    //         .then((response) => response.json())
-    //         .then((data) => setApiData(data.result));
-    // },[])
+    useEffect(() => {
+        setHydrated(true);
+    }, []);
+    
+
+
+    useEffect(()=>{
+        if(typeof window !== 'undefined'){
+            const jwt = localStorage.getItem('jwtToken');
+            const refresh = localStorage.getItem('refreshToken');
+            fetch(`${backend_url}/user/details`, {
+            method: 'GET',
+            headers: {
+                'apikey': process.env.NEXT_PUBLIC_API_KEY,
+                'jwttoken': jwt,
+                'refreshtoken': refresh
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => setApiData(data));
+        }
+    },[signIn])
+
+    if(!signIn){
+        return "unauthorized"
+    }
+    
+    if(!hydrated){
+        return null;
+    }
+
 
 
     const pieData = [
-        { name: 'Physics', value: userData.physicsSolved },
-        { name: 'Chemistry', value: userData.chemSolved },
-        { name: 'Mathematics', value: userData.mathSolved },
+        { name: 'Physics', value: 1 },
+        { name: 'Chemistry', value: 1},
+        { name: 'Mathematics', value: 1 }
     ];
 
     return (
@@ -69,8 +90,8 @@ export default function Profile() {
                         <div className="bg-gray-800 rounded-lg p-6 shadow-lg mb-8">
                             <div className="flex flex-col items-center">
                                 <Image src="/profileimage.png" alt="User" width={150} height={150} className="rounded-full border-4 border-blue-500" />
-                                <h1 className="text-3xl font-bold mt-4">{userData.name}</h1>
-                                <h2 className="text-xl text-gray-400">@{userData.username}</h2>
+                                <h1 className="text-3xl font-bold mt-4">{apiData?.name || "Loading..."}</h1>
+                                <h2 className="text-xl text-gray-400">@{apiData?.username || "Loading..."}</h2>
                                 <p className="text-blue-400 font-semibold mt-2">{userData.title}</p>
                                 <p className="text-center mt-4 text-gray-300">{userData.bio}</p>
                                 <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1">
