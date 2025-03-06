@@ -1,10 +1,11 @@
 'use client'
 import Image from "next/image"
-import { useState, useEffect,useContext } from "react"
+import { useState, useEffect, useContext } from "react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { BookOpen, Target, Calendar, Brain, FileText, Award } from 'lucide-react'
 import { ThemeContext } from "@/app/context/usecontext"
-
+import Modal from "@/app/components/modal"
+import UpdateProfile from './updateProfile'
 
 const mockUserData = {
     title: "JEE Aspirant",
@@ -38,38 +39,40 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28'];
 export default function Profile() {
     const [userData, setUserData] = useState(mockUserData);
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL
-    const [apiData,setApiData]  =useState();
-    const {signIn} = useContext(ThemeContext);
+    const [apiData, setApiData] = useState();
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const { signIn } = useContext(ThemeContext);
     const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
         setHydrated(true);
     }, []);
+
     
+      
 
-
-    useEffect(()=>{
-        if(typeof window !== 'undefined'){
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
             const jwt = localStorage.getItem('jwtToken');
             const refresh = localStorage.getItem('refreshToken');
             fetch(`${backend_url}/user/details`, {
-            method: 'GET',
-            headers: {
-                'apikey': process.env.NEXT_PUBLIC_API_KEY,
-                'jwttoken': jwt,
-                'refreshtoken': refresh
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => setApiData(data));
+                method: 'GET',
+                headers: {
+                    'apikey': process.env.NEXT_PUBLIC_API_KEY,
+                    'jwttoken': jwt,
+                    'refreshtoken': refresh
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => setApiData(data));
         }
-    },[signIn])
+    }, [signIn])
 
-    if(!signIn){
+    if (!signIn) {
         return "unauthorized"
     }
-    
-    if(!hydrated){
+
+    if (!hydrated) {
         return null;
     }
 
@@ -77,9 +80,10 @@ export default function Profile() {
 
     const pieData = [
         { name: 'Physics', value: 1 },
-        { name: 'Chemistry', value: 1},
+        { name: 'Chemistry', value: 1 },
         { name: 'Mathematics', value: 1 }
     ];
+
 
     return (
         <div className="bg-gray-900 min-h-screen text-gray-100">
@@ -94,9 +98,12 @@ export default function Profile() {
                                 <h2 className="text-xl text-gray-400">@{apiData?.username || "Loading..."}</h2>
                                 <p className="text-blue-400 font-semibold mt-2">{userData.title}</p>
                                 <p className="text-center mt-4 text-gray-300">{userData.bio}</p>
-                                <button className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1">
+                                <button onClick={() => setIsModalOpen(true)} className="mt-6 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1">
                                     Edit Profile
                                 </button>
+                                <Modal title="Edit Profile" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+                                    <UpdateProfile/>
+                                </Modal>
                             </div>
                         </div>
                         <div className="bg-gray-800 rounded-lg p-6 shadow-lg">
@@ -174,8 +181,8 @@ export default function Profile() {
                                                 <td className="py-2">{test.score}</td>
                                                 <td className="py-2">
                                                     <span className={`px-2 py-1 rounded text-xs ${test.percentile >= 99 ? 'bg-green-800 text-green-200' :
-                                                            test.percentile >= 95 ? 'bg-blue-800 text-blue-200' :
-                                                                'bg-yellow-800 text-yellow-200'
+                                                        test.percentile >= 95 ? 'bg-blue-800 text-blue-200' :
+                                                            'bg-yellow-800 text-yellow-200'
                                                         }`}>
                                                         {test.percentile}
                                                     </span>
