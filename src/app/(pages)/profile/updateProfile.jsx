@@ -12,7 +12,7 @@ const UpdateProfile = () => {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
-    const handleUpdateProfile = async () => {
+    const handleUpdateProfile = async (e) => {
         e.preventDefault();
         const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
         const obj = { ...formData };
