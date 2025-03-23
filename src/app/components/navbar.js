@@ -72,7 +72,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav className="bg-[#FF8C00] p-4">
+        <nav className="bg-gradient-to-r from-[#0A192F] to-[#172A45] shadow-md p-4">
             <div className="container mx-auto flex justify-between items-center">
                 <Link href="/" className="text-white font-bold text-xl">
                         <p className='text-2xl'>for5</p>

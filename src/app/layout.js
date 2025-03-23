@@ -3,7 +3,7 @@ import "./globals.css";
 import Navbar from "./components/navbar";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Footer from "./components/footer"
+import Footer from "./components/footer";
 import { ThemeProvider } from "./context/usecontext";
 
 const geistSans = localFont({
@@ -26,22 +26,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <ThemeProvider>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
         >
-        <Navbar/>
-        {children}
-        <Footer/>
-        <ToastContainer
-                    position="top-right" 
-                    autoClose={2000}
-                    hideProgressBar={false}
-                    closeOnClick
-                    pauseOnHover
-                    draggable
-                    pauseOnFocusLoss
- />
-      </body>
+          <Navbar/>
+          <main className="flex-grow">{children}</main>
+          <Footer />
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+            pauseOnFocusLoss
+          />
+        </body>
       </ThemeProvider>
     </html>
   );
