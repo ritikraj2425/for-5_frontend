@@ -3,7 +3,7 @@ export default function Footer() {
     return (
         <>
             <footer>
-                <div className="bg-[#111010] text-white py-8 border-t border-gray-800">
+                <div className="bg-gradient-to-t from-[#0A192F] to-[#172A45] bottom-0 text-white py-8 ">
                     <div className="container mx-auto px-4">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="space-y-4">
@@ -36,12 +36,12 @@ export default function Footer() {
                             </div>
                         </div>
                         <br></br>
-                        <div className="text-white  border-t border-gray-800">
+                        {/* <div className="text-white  border-t border-gray-800">
                             <div className=" pt-4 pb-4 border-t border-gray-800 text-center">
                             <p className="text-sm mb-4 text-white md:mb-0">&copy; 2024 JEE Contest Platform. All rights reserved.</p>
                             </div>
 
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </footer>

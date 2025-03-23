@@ -81,7 +81,7 @@ function Questions() {
                 <button className={`rounded-3xl bg-[#D9D9D9] p-2 w-[8rem] mr-[0.5rem] mt-[0.5rem] transition-transform transform hover:scale-105 focus:scale-105 focus:bg-orange-400 hover:bg-[#B0B0B0]`} onClick={() => { setSubject('') }}>PYQs</button>
             </div>
 
-            <div className="md:ml-12 ml-4 overflow-y-auto max-h-[calc(100vh-8rem)]">
+            <div className="md:ml-12 ml-4 overflow-y-auto max-h-[calc(120vh-8rem)]">
                 {questionData.result ?
                     <table className="w-full border-collapse mt-16">
                         <thead>
